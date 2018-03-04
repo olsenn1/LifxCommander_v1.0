@@ -9,6 +9,7 @@ public class ControlMethods {
 	static public void sendBroadcastMessage(byte[] messageByteArray, int port) throws IOException {
 		DatagramSocket socket = new DatagramSocket();
 		socket.setBroadcast(true);
+		socket.setReuseAddress(true);
 
 		Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
 		while(interfaces.hasMoreElements()) {
@@ -34,6 +35,7 @@ public class ControlMethods {
 		InetAddress address = InetAddress.getByName(ipAddress);
 		DatagramPacket packet = new DatagramPacket(messageByteArray, messageByteArray.length, address, port);
 		DatagramSocket socket = new DatagramSocket();
+		socket.setReuseAddress(true);
 		socket.send(packet);
 		socket.close();
 	}
@@ -42,12 +44,15 @@ public class ControlMethods {
 		InetAddress address = InetAddress.getByName(ipAddress);
 		DatagramPacket packet = new DatagramPacket(messageByteArray, messageByteArray.length, address, port);
 		DatagramSocket socket = new DatagramSocket();
+		socket.setReuseAddress(true);
 		socket.send(packet);
 		socket.close();	
 	}
 	
 	static public byte[] receiveUdpMessage(int port) throws IOException{
-		DatagramSocket socket = new DatagramSocket(port);
+		DatagramSocket socket = new DatagramSocket(null);
+		socket.setReuseAddress(true);
+		socket.bind(new InetSocketAddress(port));
 		byte[] data = new byte[1500];
 			
 		DatagramPacket packet = new DatagramPacket(data, data.length);

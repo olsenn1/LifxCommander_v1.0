@@ -2,6 +2,8 @@ package org.stevenlowes.tools.lifx_controller.Messages.Header
 
 import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods
 
+//TODO make immutable
+
 data class Frame(
     var size: Int = 0,                // 16-Bits
     var origin: Int = 0,                // 2-Bits

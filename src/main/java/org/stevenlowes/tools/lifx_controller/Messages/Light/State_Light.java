@@ -93,24 +93,36 @@ public class State_Light extends Payload {
 
     public void setFromCommandByteArray(byte[] byteArray) {
         String hueBinStr = "";
-        for (int i = 37; i > 35; i--) hueBinStr = hueBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 37; i > 35; i--) {
+            hueBinStr = hueBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         color.setHue(Integer.parseInt(hueBinStr, 2));
         String saturationBinStr = "";
-        for (int i = 39; i > 37; i--) saturationBinStr = saturationBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 39; i > 37; i--) {
+            saturationBinStr = saturationBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         color.setSaturation(Integer.parseInt(saturationBinStr, 2));
         String brightnessBinStr = "";
-        for (int i = 41; i > 39; i--) brightnessBinStr = brightnessBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 41; i > 39; i--) {
+            brightnessBinStr = brightnessBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         color.setBrightness(Integer.parseInt(brightnessBinStr, 2));
         String kelvinBinStr = "";
-        for (int i = 43; i > 41; i--) kelvinBinStr = kelvinBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 43; i > 41; i--) {
+            kelvinBinStr = kelvinBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         color.setKelvin(Integer.parseInt(kelvinBinStr, 2));
 
         String reserved1BinStr = "";
-        for (int i = 45; i > 43; i--) reserved1BinStr = reserved1BinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 45; i > 43; i--) {
+            reserved1BinStr = reserved1BinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         reserved1 = Integer.parseInt(reserved1BinStr, 2);
 
         String powerBinStr = "";
-        for (int i = 47; i > 45; i--) powerBinStr = powerBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        for (int i = 47; i > 45; i--) {
+            powerBinStr = powerBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        }
         power = Integer.parseInt(powerBinStr, 2);
 
         byte[] labelBytes = new byte[32];
@@ -118,7 +130,9 @@ public class State_Light extends Payload {
         label = new String(labelBytes);
 
         byte[] reserved2Bytes = new byte[8];
-        for (int i = 87; i > 79; i--) reserved2Bytes[(-1 * i) + 87] = byteArray[i];
+        for (int i = 87; i > 79; i--) {
+            reserved2Bytes[(-1 * i) + 87] = byteArray[i];
+        }
         reserved2 = new BigInteger(reserved2Bytes);
     }
 

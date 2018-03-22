@@ -4,10 +4,10 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateVersion extends Payload {
-	int code = 33;
-	long vendor;			// 32-Bits (Unsigned)
-	long product;			// 32-Bits (Unsigned)
-	long version;			// 32-Bits (Unsigned)
+	private final int code = 33;
+	private long vendor;			// 32-Bits (Unsigned)
+	private long product;			// 32-Bits (Unsigned)
+	private long version;			// 32-Bits (Unsigned)
 	
 	public StateVersion() {
 		vendor = 0L;

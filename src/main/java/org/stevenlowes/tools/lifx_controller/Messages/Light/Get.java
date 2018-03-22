@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifx_controller.Messages.Light;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class Get extends Payload{
-	int code = 101;
+	private final int code = 101;
 	
 	public Get() {}
 	

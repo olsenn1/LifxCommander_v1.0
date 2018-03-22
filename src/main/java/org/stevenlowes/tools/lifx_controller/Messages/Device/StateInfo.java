@@ -5,10 +5,10 @@ import java.math.BigInteger;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateInfo extends Payload{
-	int code = 35;
-	BigInteger time;				// 64-Bits (Unsigned)
-	BigInteger uptime;			    // 64-Bits (Unsigned)
-	BigInteger downtime;			// 64-Bits (Unsigned)
+	private final int code = 35;
+	private BigInteger time;				// 64-Bits (Unsigned)
+	private BigInteger uptime;			    // 64-Bits (Unsigned)
+	private BigInteger downtime;			// 64-Bits (Unsigned)
 	
 	public StateInfo() {
 		time = BigInteger.valueOf(0L);

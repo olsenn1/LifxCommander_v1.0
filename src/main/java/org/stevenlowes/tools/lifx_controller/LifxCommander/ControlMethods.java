@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 
-public class ControlMethods {
+class ControlMethods {
 	
 	static public void sendBroadcastMessage(byte[] messageByteArray, int port) throws IOException {
 		DatagramSocket socket = new DatagramSocket();
@@ -51,11 +51,9 @@ public class ControlMethods {
 		byte[] data = new byte[1500];
 			
 		DatagramPacket packet = new DatagramPacket(data, data.length);
-		while(true) {
-			socket.receive(packet);
-			socket.close();
-			return packet.getData();
-		}
+		socket.receive(packet);
+		socket.close();
+		return packet.getData();
 	}
 	
 	

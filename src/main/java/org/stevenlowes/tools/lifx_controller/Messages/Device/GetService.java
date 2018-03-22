@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifx_controller.Messages.Device;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class GetService extends Payload {
-	int code = 2;
+	private final int code = 2;
 	
 	public GetService() {}
 	

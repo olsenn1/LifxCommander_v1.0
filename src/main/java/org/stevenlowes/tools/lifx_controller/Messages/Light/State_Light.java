@@ -8,18 +8,18 @@ import org.stevenlowes.tools.lifx_controller.Values.Power;
 import java.math.BigInteger;
 
 public class State_Light extends Payload {
-    int code = 107;
-    HSBK color;
-    int reserved1;            // 16-Bits
-    int power;                // 16-Bits (Unsigned)
-    String label;            // 32-Bytes
-    BigInteger reserved2;    // 64-Bits (Unsigned)
+    private final int code = 107;
+    private HSBK color;
+    private int reserved1;            // 16-Bits
+    private int power;                // 16-Bits (Unsigned)
+    private String label;            // 32-Bytes
+    private BigInteger reserved2;    // 64-Bits (Unsigned)
 
     public State_Light() {
         color = new HSBK();
         reserved1 = 0;                            // Always = 0
         power = Power.OFF;
-        label = new String();
+        label = "";
         reserved2 = BigInteger.valueOf(0L);        // Always = 0
     }
 
@@ -114,7 +114,7 @@ public class State_Light extends Payload {
         power = Integer.parseInt(powerBinStr, 2);
 
         byte[] labelBytes = new byte[32];
-        for (int i = 48; i < 80; i++) labelBytes[i - 48] = byteArray[i];
+        System.arraycopy(byteArray, 48, labelBytes, 0, 32);
         label = new String(labelBytes);
 
         byte[] reserved2Bytes = new byte[8];

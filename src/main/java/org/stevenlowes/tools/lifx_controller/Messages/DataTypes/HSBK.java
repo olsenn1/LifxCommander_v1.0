@@ -4,10 +4,10 @@ import org.stevenlowes.tools.lifx_controller.Values.Kelvin;
 import org.stevenlowes.tools.lifx_controller.Values.Levels;
 
 public class HSBK {
-	int hue;			// 16-Bits
-	int saturation;		// 16-Bits
-	int brightness;		// 16-Bits
-	int kelvin;			// 16-Bits
+	private int hue;			// 16-Bits
+	private int saturation;		// 16-Bits
+	private int brightness;		// 16-Bits
+	private int kelvin;			// 16-Bits
 	
 	public HSBK() {
 		hue = 0;

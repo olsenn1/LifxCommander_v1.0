@@ -4,9 +4,9 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateService extends Payload {
-	int code = 3;
-	int service;		// 8-Bits (Unsigned)
-	int port;			// 32-Bits (Unsigned)
+	private final int code = 3;
+	private int service;		// 8-Bits (Unsigned)
+	private int port;			// 32-Bits (Unsigned)
 	
 	public StateService() {
 		service = 0;

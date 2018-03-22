@@ -3,12 +3,12 @@ package org.stevenlowes.tools.lifx_controller.Messages.Header;
 import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 
 public class Frame {
-	int size;				// 16-Bits
-	int origin;				// 2-Bits
-	boolean tagged;			// 1-Bit
-	boolean addressable;	// 1-Bit
-	int protocol;			// 12-Bits
-	long source;			// 32-Bits
+	private int size;				// 16-Bits
+	private int origin;				// 2-Bits
+	private boolean tagged;			// 1-Bit
+	private boolean addressable;	// 1-Bit
+	private int protocol;			// 12-Bits
+	private long source;			// 32-Bits
 	
 	public Frame(){
 		size = 0;
@@ -107,9 +107,9 @@ public class Frame {
 		byte[] dataBytes = new byte[2];
 		String originBinStr = Integer.toBinaryString(0x04 | origin).substring(1);
 		String taggedBinStr; 
-		if(tagged == true)taggedBinStr = "1"; else taggedBinStr = "0";
+		if(tagged)taggedBinStr = "1"; else taggedBinStr = "0";
 		String addressableBinStr;
-		if(addressable == true)addressableBinStr = "1"; else addressableBinStr = "0";
+		if(addressable)addressableBinStr = "1"; else addressableBinStr = "0";
 		String protocolBinStr = Integer.toBinaryString(0x1000 | protocol).substring(1);
 		String dataBinStr = originBinStr.concat(taggedBinStr).concat(addressableBinStr).concat(protocolBinStr);
 		dataBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(dataBinStr);
@@ -134,9 +134,9 @@ public class Frame {
 		String dataBinStr = CommonMethods.convertByteToBinaryString(byteArray[3]).concat(CommonMethods.convertByteToBinaryString(byteArray[2]));
 		String originBinStr = dataBinStr.substring(0, 2);
 		origin = Integer.parseInt(originBinStr, 2);
-		
-		if(dataBinStr.charAt(2) == '1') tagged = true; else tagged = false;
-		if(dataBinStr.charAt(3) == '1') addressable = true; else addressable = false;
+
+        tagged = dataBinStr.charAt(2) == '1';
+		addressable = dataBinStr.charAt(3) == '1';
 		String protocolBinStr = dataBinStr.substring(4, 16);
 		protocol = Integer.parseInt(protocolBinStr, 2);
 		

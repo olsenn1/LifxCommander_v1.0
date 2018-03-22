@@ -6,18 +6,18 @@ import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 import org.stevenlowes.tools.lifx_controller.Values.Waveforms;
 
 public class SetWaveformOptional extends Payload {
-	int code = 119;
-	int reserved;					// 8-Bits (Unsigned)
-	boolean isTransient;			// 8-Bits 
-	HSBK color;
-	long period;					// 32-Bits (Unsigned)
-	float cycles;					// 32-Bits
-	int scew_ratio;					// 16-Bits
-	int waveform;					// 8-Bits (Unsigned)
-	boolean set_hue;				// 8-Bits
-	boolean set_saturation;			// 8-Bits
-	boolean set_brightness;			// 8-Bits
-	boolean set_kelvin;				// 8-Bits
+	private final int code = 119;
+	private int reserved;					// 8-Bits (Unsigned)
+	private boolean isTransient;			// 8-Bits
+	private HSBK color;
+	private long period;					// 32-Bits (Unsigned)
+	private float cycles;					// 32-Bits
+	private int scew_ratio;					// 16-Bits
+	private int waveform;					// 8-Bits (Unsigned)
+	private boolean set_hue;				// 8-Bits
+	private boolean set_saturation;			// 8-Bits
+	private boolean set_brightness;			// 8-Bits
+	private boolean set_kelvin;				// 8-Bits
 	
 	public SetWaveformOptional() {
 		reserved = 0;				// Always = 0
@@ -177,7 +177,7 @@ public class SetWaveformOptional extends Payload {
 		
 		byte[] transientByte = new byte[1];
 		String transientBinStr;
-		if(isTransient == true) transientBinStr = "00000001";
+		if(isTransient) transientBinStr = "00000001";
 		else transientBinStr = "00000000";
 		transientByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(transientBinStr);
 		byteArray[1] = transientByte[0];
@@ -209,12 +209,12 @@ public class SetWaveformOptional extends Payload {
 		byte[] periodBytes = new byte[4];
 		String periodBinStr = String.format("%32s", Long.toBinaryString(period)).replace(' ', '0');
 		periodBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(periodBinStr);
-		for(int i=10; i<14; i++) byteArray[i] = periodBytes[i - 10];
+		System.arraycopy(periodBytes, 0, byteArray, 10, 4);
 		
 		byte[] cyclesBytes = new byte[4];
 		String cyclesBinStr = String.format("%32s", Integer.toBinaryString(Float.floatToRawIntBits(cycles))).replace(' ', '0');
 		cyclesBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(cyclesBinStr);
-		for(int i=14; i<18; i++) byteArray[i] = cyclesBytes[i - 14];
+		System.arraycopy(cyclesBytes, 0, byteArray, 14, 4);
 		
 		byte[] scewRatioBytes = new byte[2];
 		String scewRatioBinStr = String.format("%16s", Integer.toBinaryString(scew_ratio)).replace(' ', '0');
@@ -229,25 +229,25 @@ public class SetWaveformOptional extends Payload {
 		
 		byte[] setHueByte = new byte[1];
 		String setHueBinStr;
-		if(set_hue == true) setHueBinStr = "00000001"; else setHueBinStr = "00000000";
+		if(set_hue) setHueBinStr = "00000001"; else setHueBinStr = "00000000";
 		setHueByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(setHueBinStr);
 		byteArray[21] = setHueByte[0];
 		
 		byte[] setSaturationByte = new byte[1];
 		String setSaturationBinStr;
-		if(set_saturation == true) setSaturationBinStr = "00000001"; else setSaturationBinStr = "00000000";
+		if(set_saturation) setSaturationBinStr = "00000001"; else setSaturationBinStr = "00000000";
 		setSaturationByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(setSaturationBinStr);
 		byteArray[22] = setSaturationByte[0];
 		
 		byte[] setBrightnessByte = new byte[1];
 		String setBrightnessBinStr;
-		if(set_brightness == true) setBrightnessBinStr = "00000001"; else setBrightnessBinStr = "00000000";
+		if(set_brightness) setBrightnessBinStr = "00000001"; else setBrightnessBinStr = "00000000";
 		setBrightnessByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(setBrightnessBinStr);
 		byteArray[23] = setBrightnessByte[0];
 		
 		byte[] setKelvinByte = new byte[1];
 		String setKelvinBinStr;
-		if(set_kelvin == true) setKelvinBinStr = "00000001"; else setKelvinBinStr = "00000000";
+		if(set_kelvin) setKelvinBinStr = "00000001"; else setKelvinBinStr = "00000000";
 		setKelvinByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(setKelvinBinStr);
 		byteArray[24] = setKelvinByte[0];
 		

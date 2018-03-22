@@ -3,8 +3,8 @@ package org.stevenlowes.tools.lifx_controller.Messages.Device;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class EchoResponse extends Payload{
-	int code = 59;
-	byte[] payload;			// 64-Bytes
+	private final int code = 59;
+	private byte[] payload;			// 64-Bytes
 	
 	public EchoResponse() {
 		payload = new byte[64];

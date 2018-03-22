@@ -8,10 +8,10 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetGroup extends Payload{
-	int code = 52;
+	private final int code = 52;
 	byte[] group;				// 16-Bytes
 	String label;				// 32-Bytes
-	BigInteger updated_at;		// 64-Bits (Unsigned)
+	private BigInteger updated_at;		// 64-Bits (Unsigned)
 	
 	public SetGroup() {
 		group = new byte[16];
@@ -88,7 +88,7 @@ public class SetGroup extends Payload{
 		byte[] updatedAtBytes = new byte[8];
 		String updatedAtBinStr = String.format("%64s", Long.toBinaryString(updated_at.longValue())).replace(' ', '0');
 		updatedAtBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(updatedAtBinStr);
-		for(int i=48; i<56; i++) byteArray[i] = updatedAtBytes[i - 48];
+		System.arraycopy(updatedAtBytes, 0, byteArray, 48, 8);
 		
 		return byteArray;
 	}

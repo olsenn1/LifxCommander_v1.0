@@ -3,8 +3,8 @@ package org.stevenlowes.tools.lifx_controller.Messages.Device;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetLabel extends Payload{
-	int code = 24;
-	String label;			// 32-Bytes
+	private final int code = 24;
+	private String label;			// 32-Bytes
 	
 	public SetLabel() {
 		label = "";

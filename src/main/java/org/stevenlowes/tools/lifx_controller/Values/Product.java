@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifx_controller.Values;
 
-public class Product {
+class Product {
 	private Product() {}		// Prevent Instantiation
 	
 	public static final int ORIGINAL_1000 = 1;

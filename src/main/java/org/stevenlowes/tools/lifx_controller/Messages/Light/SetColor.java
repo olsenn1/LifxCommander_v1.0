@@ -5,10 +5,10 @@ import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.HSBK;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetColor extends Payload {
-	int code = 102;
-	int reserved;			// 8-Bits
-	HSBK hsbk;
-	long duration;			// 32-Bits (Unsigned)
+	private final int code = 102;
+	private int reserved;			// 8-Bits
+	private HSBK hsbk;
+	private long duration;			// 32-Bits (Unsigned)
 	
 	public SetColor() {
 		reserved = 0;

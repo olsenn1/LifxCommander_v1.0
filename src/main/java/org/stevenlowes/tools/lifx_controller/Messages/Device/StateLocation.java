@@ -7,10 +7,10 @@ import java.util.Random;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateLocation extends Payload{
-	int code = 50;
-	byte[] location;			// 16-Bytes
-	String label;				// 32-Bytes
-	BigInteger updated_at;		// 64-Bits (Unsigned)
+	private final int code = 50;
+	private byte[] location;			// 16-Bytes
+	private String label;				// 32-Bytes
+	private BigInteger updated_at;		// 64-Bits (Unsigned)
 	
 	public StateLocation() {
 		location = new byte[16];
@@ -80,7 +80,7 @@ public class StateLocation extends Payload{
 		for(int i=51; i>35; i--) location[(-1*i)+51] = byteArray[i];
 		
 		byte[] labelBytes = new byte[32];
-		for(int i=52; i<84; i++) labelBytes[i-52] = byteArray[i];
+        System.arraycopy(byteArray, 52, labelBytes, 0, 32);
 		label = new String(labelBytes);
 		
 		//String updatedAtBinStr = "";

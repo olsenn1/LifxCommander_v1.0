@@ -3,8 +3,8 @@ package org.stevenlowes.tools.lifx_controller.Messages.Device;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateLabel extends Payload{
-	int code = 25;
-	String label;			// 32-Bytes
+	private final int code = 25;
+	private String label;			// 32-Bytes
 	
 	public StateLabel() {
 		label = "";
@@ -32,7 +32,7 @@ public class StateLabel extends Payload{
 	
 	public void setFromCommandByteArray(byte[] byteArray) {
 		byte[] labelBytes = new byte[32];
-		for(int i=36; i<68; i++) labelBytes[i-36] = byteArray[i];
+		System.arraycopy(byteArray, 36, labelBytes, 0, 32);
 		label = new String(labelBytes);
 	}
 }

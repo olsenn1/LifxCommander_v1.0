@@ -7,14 +7,14 @@ import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 import org.stevenlowes.tools.lifx_controller.Values.Waveforms;
 
 public class SetWaveform extends Payload {
-	int code = 103;
-	int reserved;					// 8-Bits (Unsigned)
-	boolean isTransient;			// 8-Bits 
-	HSBK color;
-	long period;					// 32-Bits (Unsigned)
-	float cycles;					// 32-Bits
-	int scew_ratio;					// 16-Bits
-	int waveform;					// 8-Bits (Unsigned)
+	private final int code = 103;
+	private int reserved;					// 8-Bits (Unsigned)
+	private boolean isTransient;			// 8-Bits
+	private HSBK color;
+	private long period;					// 32-Bits (Unsigned)
+	private float cycles;					// 32-Bits
+	private int scew_ratio;					// 16-Bits
+	private int waveform;					// 8-Bits (Unsigned)
 	
 	public SetWaveform() {
 		reserved = 0;				// Always = 0
@@ -126,7 +126,7 @@ public class SetWaveform extends Payload {
 		
 		byte[] transientByte = new byte[1];
 		String transientBinStr;
-		if(isTransient == true) transientBinStr = "00000001";
+		if(isTransient) transientBinStr = "00000001";
 		else transientBinStr = "00000000";
 		transientByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(transientBinStr);
 		byteArray[1] = transientByte[0];
@@ -158,12 +158,12 @@ public class SetWaveform extends Payload {
 		byte[] periodBytes = new byte[4];
 		String periodBinStr = String.format("%32s", Long.toBinaryString(period)).replace(' ', '0');
 		periodBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(periodBinStr);
-		for(int i=10; i<14; i++) byteArray[i] = periodBytes[i - 10];
+		System.arraycopy(periodBytes, 0, byteArray, 10, 4);
 		
 		byte[] cyclesBytes = new byte[4];
 		String cyclesBinStr = String.format("%32s", Integer.toBinaryString(Float.floatToRawIntBits(cycles))).replace(' ', '0');
 		cyclesBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(cyclesBinStr);
-		for(int i=14; i<18; i++) byteArray[i] = cyclesBytes[i - 14];
+		System.arraycopy(cyclesBytes, 0, byteArray, 14, 4);
 		
 		byte[] scewRatioBytes = new byte[2];
 		String scewRatioBinStr = String.format("%16s", Integer.toBinaryString(scew_ratio)).replace(' ', '0');

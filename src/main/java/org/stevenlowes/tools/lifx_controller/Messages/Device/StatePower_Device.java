@@ -5,8 +5,8 @@ import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 import org.stevenlowes.tools.lifx_controller.Values.Power;
 
 public class StatePower_Device extends Payload {
-	int code = 22;
-	int level;				// 16-Bits (Unsigned)
+	private final int code = 22;
+	private int level;				// 16-Bits (Unsigned)
 	
 	public StatePower_Device() {
 		level = Power.OFF;

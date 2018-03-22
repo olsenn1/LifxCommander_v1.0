@@ -6,10 +6,10 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateHostFirmware extends Payload{
-	int code = 15;
-	BigInteger build;				// 64-Bits (Unsigned)
-	BigInteger reserved;			// 64-Bits (Unsigned)
-	long version;					// 32-Bits
+	private final int code = 15;
+	private BigInteger build;				// 64-Bits (Unsigned)
+	private BigInteger reserved;			// 64-Bits (Unsigned)
+	private long version;					// 32-Bits
 	
 	public StateHostFirmware() {
 		build = BigInteger.valueOf(0L);

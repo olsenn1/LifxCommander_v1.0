@@ -5,8 +5,8 @@ import java.util.Random;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class EchoRequest extends Payload{
-	int code = 58;
-	byte[] payload;			// 64-Bytes
+	private final int code = 58;
+	private byte[] payload;			// 64-Bytes
 	
 	public EchoRequest() {
 		payload = new byte[64];

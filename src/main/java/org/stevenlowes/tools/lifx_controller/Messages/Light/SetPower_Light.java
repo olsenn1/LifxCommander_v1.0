@@ -4,9 +4,9 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetPower_Light extends Payload {
-	int code = 117;
-	int level;				// 16-Bits
-	long duration;			// 32-Bits (Unsigned)
+	private final int code = 117;
+	private int level;				// 16-Bits
+	private long duration;			// 32-Bits (Unsigned)
 	
 	public SetPower_Light() {
 		level = 0;
@@ -60,7 +60,7 @@ public class SetPower_Light extends Payload {
 		byte[] durationBytes = new byte[4];
 		String durationBinStr = String.format("%32s", Long.toBinaryString(duration)).replace(' ', '0');
 		durationBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(durationBinStr);
-		for(int i=2; i<6; i++) byteArray[i] = durationBytes[i - 2];
+        System.arraycopy(durationBytes, 0, byteArray, 2, 4);
 		
 		return byteArray;
 	}

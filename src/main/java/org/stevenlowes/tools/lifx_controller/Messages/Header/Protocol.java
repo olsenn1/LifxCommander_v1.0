@@ -4,9 +4,9 @@ package org.stevenlowes.tools.lifx_controller.Messages.Header;
 import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 
 public class Protocol {
-	long reserved1;				// 64-Bits
-	int type;					// 16-Bits
-	int reserved2;				// 16-Bits
+	private long reserved1;				// 64-Bits
+	private int type;					// 16-Bits
+	private int reserved2;				// 16-Bits
 	
 	public Protocol() {
 		reserved1 = 0;			// Always = 0
@@ -54,9 +54,7 @@ public class Protocol {
 		byte[] reserved1Bytes = new byte[8];
 		String reserved1BinStr = String.format("%64s", Long.toBinaryString(reserved1)).replace(' ', '0');
 		reserved1Bytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(reserved1BinStr);
-		for (int i=0; i<8; i++) {
-			byteArray[i] = reserved1Bytes[i];
-		}
+        System.arraycopy(reserved1Bytes, 0, byteArray, 0, 8);
 		
 		byte[] typeBytes = new byte[2];
 		String typeBinStr = String.format("%16s", Integer.toBinaryString(type)).replace(' ', '0');

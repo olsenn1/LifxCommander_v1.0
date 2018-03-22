@@ -18,10 +18,8 @@ public class CommonMethods {
 			ByteBuffer byteBuffer = ByteBuffer.allocate(8);
 			byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
 			byteBuffer.putLong(binaryToLong);
-			
-			for(int i=0; i<arrayLength; i++){
-				byteArray[i] = byteBuffer.array()[i];	
-			}
+
+			System.arraycopy(byteBuffer.array(), 0, byteArray, 0, arrayLength);
 			
 			return byteArray;
 		}
@@ -69,9 +67,8 @@ public class CommonMethods {
 		Date date = new Date(duration);
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy @h:mma", Locale.ENGLISH);
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-		String formattedDate = sdf.format(date);
-		
-		return formattedDate;
+
+		return sdf.format(date);
 	}
 	
 	

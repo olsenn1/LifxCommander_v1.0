@@ -1,4 +1,4 @@
-/**
+/*
  * Lifx Commander
  * Author: Nicholas Olsen
  * Email: olsenn@gmail.com
@@ -19,7 +19,7 @@ import org.stevenlowes.tools.lifx_controller.Values.Waveforms;
 
 import java.io.IOException;
 
-public class Main {
+class Main {
 
 	public static void main(String[] args) throws IOException {
 		int port = 56700;

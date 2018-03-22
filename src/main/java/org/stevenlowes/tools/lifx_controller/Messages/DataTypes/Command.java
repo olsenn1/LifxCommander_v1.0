@@ -9,10 +9,10 @@ import org.stevenlowes.tools.lifx_controller.Messages.Light.StatePower_Light;
 import org.stevenlowes.tools.lifx_controller.Messages.Light.State_Light;
 
 public class Command {
-	Frame frame;
-	FrameAddress frameAddress;
-	Protocol protocol;
-	Payload payload;
+	private Frame frame;
+	private FrameAddress frameAddress;
+	private Protocol protocol;
+	private Payload payload;
 	
 	public Command() {
 		frame = new Frame();
@@ -71,7 +71,7 @@ public class Command {
 		this.payload = payload;
 	}
 	
-	public void setSize() {
+	private void setSize() {
 		int size;
 		if(payload.getByteArray() != null) size = frame.getByteArray().length + frameAddress.getByteArray().length + protocol.getByteArray().length + payload.getByteArray().length;
 		else size = frame.getByteArray().length + frameAddress.getByteArray().length + protocol.getByteArray().length;

@@ -4,8 +4,8 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StatePower_Light extends Payload{
-	int code = 118;
-	int level;				// 16-Bits (Unsigned)
+	private final int code = 118;
+	private int level;				// 16-Bits (Unsigned)
 	
 	public StatePower_Light() {
 		level = 0;

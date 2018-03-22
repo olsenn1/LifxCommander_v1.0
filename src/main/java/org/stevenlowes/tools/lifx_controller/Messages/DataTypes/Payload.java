@@ -1,7 +1,7 @@
 package org.stevenlowes.tools.lifx_controller.Messages.DataTypes;
 
 public class Payload {
-	int code = 0;
+	private final int code = 0;
 	
 	public byte[] getByteArray() {
 		

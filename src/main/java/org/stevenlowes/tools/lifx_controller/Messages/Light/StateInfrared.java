@@ -4,8 +4,8 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateInfrared extends Payload {
-	int code = 121;
-	int brightness;			// 16-Bits (Unsigned)
+	private final int code = 121;
+	private int brightness;			// 16-Bits (Unsigned)
 	
 	public StateInfrared() {
 		brightness = 0;

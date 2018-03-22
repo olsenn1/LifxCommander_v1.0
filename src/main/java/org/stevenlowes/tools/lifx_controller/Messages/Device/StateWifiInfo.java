@@ -4,11 +4,11 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class StateWifiInfo extends Payload {
-	int code = 17;
-	float signal;			// 32-Bits
-	long tx;				// 32-Bits (Unsigned)
-	long rx;				// 32-Bits (Unsigned)
-	int reserved;			// 16-Bits (Unsigned)
+	private final int code = 17;
+	private float signal;			// 32-Bits
+	private long tx;				// 32-Bits (Unsigned)
+	private long rx;				// 32-Bits (Unsigned)
+	private int reserved;			// 16-Bits (Unsigned)
 	
 	public StateWifiInfo() {
 		signal = 0F;

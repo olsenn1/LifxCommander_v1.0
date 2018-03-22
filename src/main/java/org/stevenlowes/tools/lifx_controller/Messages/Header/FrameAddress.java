@@ -4,12 +4,12 @@ package org.stevenlowes.tools.lifx_controller.Messages.Header;
 import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 
 public class FrameAddress {
-	long target;				// 64-Bits
-	long reserved1;				// 48-Bits
-	int reserved2;				// 6-Bits
-	boolean ack_required;		// 1-Bit
-	boolean res_required;		// 1-Bit
-	int sequence;				// 8-Bits
+	private long target;				// 64-Bits
+	private long reserved1;				// 48-Bits
+	private int reserved2;				// 6-Bits
+	private boolean ack_required;		// 1-Bit
+	private boolean res_required;		// 1-Bit
+	private int sequence;				// 8-Bits
 	
 	public FrameAddress() {
 		target = 0;
@@ -106,23 +106,19 @@ public class FrameAddress {
 		byte[] targetBytes = new byte[8];
 		String targetBinStr = String.format("%64s", Long.toBinaryString(target)).replace(' ', '0');
 		targetBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(targetBinStr);
-		for(int i=0; i<8; i++) {
-			byteArray[i] = targetBytes[i];
-		}
+        System.arraycopy(targetBytes, 0, byteArray, 0, 8);
 		
 		byte[] reserved1Bytes = new byte[6];
 		String reserved1BinStr = String.format("%48s", Long.toBinaryString(reserved1)).replace(' ', '0');
 		reserved1Bytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(reserved1BinStr);
-		for(int i=8; i<14; i++) {
-			byteArray[i] = reserved1Bytes[i-8];
-		}
+        System.arraycopy(reserved1Bytes, 0, byteArray, 8, 6);
 		
 		byte[] dataByte = new byte[1];
 		String reserved2BinStr = String.format("%6s", Integer.toBinaryString(reserved2)).replace(' ', '0');
 		String ackRequiredBinStr;
-		if(ack_required == true) ackRequiredBinStr = "1"; else ackRequiredBinStr = "0";
+		if(ack_required) ackRequiredBinStr = "1"; else ackRequiredBinStr = "0";
 		String resRequiredBinStr;
-		if(res_required == true) resRequiredBinStr = "1"; else resRequiredBinStr = "0";
+		if(res_required) resRequiredBinStr = "1"; else resRequiredBinStr = "0";
 		String dataBinStr = reserved2BinStr.concat(ackRequiredBinStr).concat(resRequiredBinStr);
 		dataByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(dataBinStr);
 		byteArray[14] = dataByte[0];
@@ -148,8 +144,8 @@ public class FrameAddress {
 		String dataBinStr = CommonMethods.convertByteToBinaryString(byteArray[22]);
 		String reserved2BinStr = dataBinStr.substring(0, 6);
 		reserved2 = Integer.parseInt(reserved2BinStr, 2);
-		if(dataBinStr.charAt(6) == '1') ack_required = true; else ack_required = false;
-		if(dataBinStr.charAt(7) == '1') res_required = true; else res_required = false;
+        ack_required = dataBinStr.charAt(6) == '1';
+		res_required = dataBinStr.charAt(7) == '1';
 		
 		String sequenceBinStr = CommonMethods.convertByteToBinaryString(byteArray[23]);
 		sequence = Integer.parseInt(sequenceBinStr, 2);

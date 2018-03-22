@@ -11,9 +11,9 @@ import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class ReceiveMessages extends Thread{
+class ReceiveMessages extends Thread{
 	
-	int port;
+	private final int port;
 	
 	public ReceiveMessages() {
 		port = 56700;
@@ -82,7 +82,7 @@ public class ReceiveMessages extends Thread{
 					System.out.println("     Downtime: " + ((StateInfo)command.getPayload()).getDowntime().divide(BigInteger.valueOf(1000000000L)) + "s");
 				}
 				if(command.getProtocol().getType() == 45) {
-					//System.out.println("Acknowledged---------------------------------------------------");
+					System.out.println("Acknowledged---------------------------------------------------");
 				}
 				if(command.getProtocol().getType() == 50) {
 					System.out.println("\nStateLocation----------------------------------------------------");
@@ -119,9 +119,8 @@ public class ReceiveMessages extends Thread{
 				}
 			}
 			
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

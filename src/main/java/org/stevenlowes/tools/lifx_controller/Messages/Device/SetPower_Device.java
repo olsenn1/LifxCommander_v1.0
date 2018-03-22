@@ -4,8 +4,8 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetPower_Device extends Payload{
-	int code = 21;
-	int level;				// 16-Bits (Unsigned)
+	private final int code = 21;
+	private int level;				// 16-Bits (Unsigned)
 	
 	public SetPower_Device() {
 		level = 0;

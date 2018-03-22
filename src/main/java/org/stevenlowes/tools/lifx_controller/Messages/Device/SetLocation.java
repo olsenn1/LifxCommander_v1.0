@@ -8,10 +8,10 @@ import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods;
 import org.stevenlowes.tools.lifx_controller.Messages.DataTypes.Payload;
 
 public class SetLocation extends Payload{
-	int code = 49;
+	private final int code = 49;
 	byte[] location;			// 16-Bytes
 	String label;				// 32-Bytes
-	BigInteger updated_at;		// 64-Bits (Unsigned)
+	private BigInteger updated_at;		// 64-Bits (Unsigned)
 	
 	public SetLocation() {
 		location = new byte[16];
@@ -88,7 +88,7 @@ public class SetLocation extends Payload{
 		byte[] updatedAtBytes = new byte[8];
 		String updatedAtBinStr = String.format("%64s", Long.toBinaryString(updated_at.longValue())).replace(' ', '0');
 		updatedAtBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(updatedAtBinStr);
-		for(int i=48; i<56; i++) byteArray[i] = updatedAtBytes[i - 48];
+		System.arraycopy(updatedAtBytes, 0, byteArray, 48, 8);
 		
 		return byteArray;
 	}

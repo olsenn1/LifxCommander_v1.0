@@ -2,13 +2,14 @@ package org.stevenlowes.tools.lifx_controller.Messages.Header
 
 import org.stevenlowes.tools.lifx_controller.LifxCommander.CommonMethods
 
-class Frame {
-    var size: Int = 0                // 16-Bits
-    var origin: Int = 0                // 2-Bits
-    var tagged: Boolean = false            // 1-Bit
-    var addressable: Boolean = false    // 1-Bit
-    var protocol: Int = 0            // 12-Bits
+data class Frame(
+    var size: Int = 0,                // 16-Bits
+    var origin: Int = 0,                // 2-Bits
+    var tagged: Boolean = false,            // 1-Bit
+    var addressable: Boolean = true,    // 1-Bit
+    var protocol: Int = 1024,            // 12-Bits
     var source: Long = 0            // 32-Bits
+                ){
 
     val byteArray: ByteArray
         get() {
@@ -49,42 +50,6 @@ class Frame {
 
             return byteArray
         }
-
-    constructor() {
-        size = 0
-        origin = 0                // Always = 0
-        tagged = false
-        addressable = true        // Always = true
-        protocol = 1024        // Always = 1024
-        source = 0
-    }
-
-    constructor(size: Int, origin: Int, tagged: Boolean, addressable: Boolean, protocol: Int, source: Long) {
-        this.size = size
-        this.origin = origin
-        this.tagged = tagged
-        this.addressable = addressable
-        this.protocol = protocol
-        this.source = source
-    }
-
-    constructor(size: Int, tagged: Boolean, source: Long) {
-        this.size = size
-        origin = 0
-        this.tagged = tagged
-        addressable = true
-        protocol = 1024
-        this.source = source
-    }
-
-    constructor(frame: Frame) {
-        size = frame.size
-        origin = frame.origin
-        tagged = frame.tagged
-        addressable = frame.addressable
-        protocol = frame.protocol
-        source = frame.source
-    }
 
     fun setFromCommandByteArray(byteArray: ByteArray) {
         val sizeBinStr = CommonMethods.convertByteToBinaryString(byteArray[1]) + CommonMethods.convertByteToBinaryString(

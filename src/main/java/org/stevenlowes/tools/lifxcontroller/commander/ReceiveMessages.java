@@ -19,7 +19,7 @@ class ReceiveMessages extends Thread {
         try {
             System.out.printf("Listening on udp:%s:%d%n", InetAddress.getLocalHost().getHostAddress(), port);
             while (true) {
-                byte[] byteArray = ControlMethods.receiveUdpMessage(port);
+                byte[] byteArray = ControlMethods.INSTANCE.receiveUdpMessage(port);
                 //TODO fix this mess
                 /*
                 Command command = new Command();
@@ -81,12 +81,12 @@ class ReceiveMessages extends Thread {
                 if (command.getProtocol().getType() == 50) {
                     System.out.println("\nStateLocation----------------------------------------------------");
                     System.out.println("     Label: " + ((StateLocation) command.getPayload()).getLabel());
-                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateLocation) command.getPayload()).getUpdatedAt()));
+                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateLocation) command.getPayload()).getUpdatedAtNanos()));
                 }
                 if (command.getProtocol().getType() == 53) {
                     System.out.println("\nStateGroup--------------------------------------------------------");
                     System.out.println("     Label: " + ((StateGroup) command.getPayload()).getLabel());
-                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateGroup) command.getPayload()).getUpdatedAt()));
+                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateGroup) command.getPayload()).getUpdatedAtNanos()));
                 }
                 if (command.getProtocol().getType() == 59) {
                     System.out.println("\nEchoResponse------------------------------------------------------");

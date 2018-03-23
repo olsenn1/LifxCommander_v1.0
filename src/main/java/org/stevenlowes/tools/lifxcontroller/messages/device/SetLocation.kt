@@ -21,7 +21,7 @@ class SetLocation(var location: ByteArray = CommonMethods.randomBytes(16),
 
             var updatedAtBytes: ByteArray? = ByteArray(8)
             val updatedAtBinStr = String.format("%64s",
-                                                java.lang.Long.toBinaryString(updatedAt.toLong())).replace(' ', '0')
+                                                java.lang.Long.toBinaryString(updatedAtNanos.toLong())).replace(' ', '0')
             updatedAtBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(updatedAtBinStr)
             System.arraycopy(updatedAtBytes!!, 0, byteArray, 48, 8)
 

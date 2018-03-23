@@ -5,13 +5,13 @@ import java.math.BigInteger
 import java.time.Instant
 
 abstract class CustomReadUpdatedAtPayload(code: Int): CustomReadPayload(code){
-    lateinit var updatedAt: BigInteger
+    lateinit var updatedAtNanos: BigInteger
 
     init {
         setUpdatedAtToNow()
     }
 
     fun setUpdatedAtToNow() {
-        updatedAt = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
+        updatedAtNanos = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
     }
 }

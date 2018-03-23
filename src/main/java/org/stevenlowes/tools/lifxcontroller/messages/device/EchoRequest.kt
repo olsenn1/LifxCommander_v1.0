@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 
 class EchoRequest(payload: ByteArray? = CommonMethods.randomBytes(64)) : GetOnlyPayload(58) {
@@ -15,5 +15,5 @@ class EchoRequest(payload: ByteArray? = CommonMethods.randomBytes(64)) : GetOnly
             return byteArray
         }
 
-    constructor(echoRequest: EchoRequest): this(echoRequest.payload)
+    constructor(echoRequest: EchoRequest) : this(echoRequest.payload)
 }

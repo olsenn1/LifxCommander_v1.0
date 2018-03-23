@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 
@@ -15,25 +15,25 @@ class SetColor(var reserved: Int = 0, var hsbk: HSBK = HSBK(), var duration: Lon
             byteArray[0] = reservedByte!![0]
 
             var hueBytes: ByteArray? = ByteArray(2)
-            val hueBinStr = String.format("%16s", Integer.toBinaryString(hsbk!!.hue)).replace(' ', '0')
+            val hueBinStr = String.format("%16s", hsbk.hue.binaryString).replace(' ', '0')
             hueBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(hueBinStr)
             byteArray[1] = hueBytes!![0]
             byteArray[2] = hueBytes[1]
 
             var saturationBytes: ByteArray? = ByteArray(2)
-            val saturationBinStr = String.format("%16s", Integer.toBinaryString(hsbk!!.saturation)).replace(' ', '0')
+            val saturationBinStr = String.format("%16s", Integer.toBinaryString(hsbk.saturation)).replace(' ', '0')
             saturationBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(saturationBinStr)
             byteArray[3] = saturationBytes!![0]
             byteArray[4] = saturationBytes[1]
 
             var brightnessBytes: ByteArray? = ByteArray(2)
-            val brightnessBinStr = String.format("%16s", Integer.toBinaryString(hsbk!!.brightness)).replace(' ', '0')
+            val brightnessBinStr = String.format("%16s", Integer.toBinaryString(hsbk.brightness)).replace(' ', '0')
             brightnessBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(brightnessBinStr)
             byteArray[5] = brightnessBytes!![0]
             byteArray[6] = brightnessBytes[1]
 
             var kelvinBytes: ByteArray? = ByteArray(2)
-            val kelvinBinStr = String.format("%16s", Integer.toBinaryString(hsbk!!.kelvin)).replace(' ', '0')
+            val kelvinBinStr = String.format("%16s", Integer.toBinaryString(hsbk.kelvin)).replace(' ', '0')
             kelvinBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(kelvinBinStr)
             byteArray[7] = kelvinBytes!![0]
             byteArray[8] = kelvinBytes[1]

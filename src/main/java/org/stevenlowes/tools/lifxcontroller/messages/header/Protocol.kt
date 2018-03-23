@@ -1,7 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.messages.header
 
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 
 //TODO make immutable
 

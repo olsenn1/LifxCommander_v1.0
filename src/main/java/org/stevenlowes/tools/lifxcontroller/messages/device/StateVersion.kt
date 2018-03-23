@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 class StateVersion(var vendor: Long = 0, var product: Long = 0, var version: Long = 0) : SetOnlyPayload(33) {

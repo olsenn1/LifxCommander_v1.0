@@ -1,11 +1,13 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 import java.math.BigInteger
 
-class StateHostFirmware(var build: BigInteger = BigInteger.ZERO, var reserved: BigInteger = BigInteger.ZERO, var version: Long = 0L) : SetOnlyPayload(15) {
+class StateHostFirmware(var build: BigInteger = BigInteger.ZERO,
+                        var reserved: BigInteger = BigInteger.ZERO,
+                        var version: Long = 0L) : SetOnlyPayload(15) {
 
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         //String buildBinStr = "";

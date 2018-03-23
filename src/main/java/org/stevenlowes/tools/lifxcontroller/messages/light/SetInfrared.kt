@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 
 class SetInfrared(var brightness: Int = 0) : GetOnlyPayload(122) {

@@ -1,13 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.commander;
 
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.Command;
-import org.stevenlowes.tools.lifxcontroller.messages.device.*;
-import org.stevenlowes.tools.lifxcontroller.messages.light.StateInfrared;
-import org.stevenlowes.tools.lifxcontroller.messages.light.StatePower_Light;
-import org.stevenlowes.tools.lifxcontroller.messages.light.StateLight;
-
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.InetAddress;
 
 class ReceiveMessages extends Thread {
@@ -101,17 +94,17 @@ class ReceiveMessages extends Thread {
                 }
                 if (command.getProtocol().getType() == 107) {
                     System.out.println("\nState------------------------------------------------------------");
-                    System.out.println("     Hue: " + ((StateLight) command.getPayload()).getColor().getHue());
+                    System.out.println("     Hue: " + ((StateLight) command.getPayload()).getColor().getAsLevel());
                     System.out.println("     Saturation: " + ((StateLight) command.getPayload()).getColor().getSaturation());
                     System.out.println("     Brightness: " + ((StateLight) command.getPayload()).getColor().getBrightness());
-                    System.out.println("     Kelvin: " + ((StateLight) command.getPayload()).getColor().getKelvin());
+                    System.out.println("     Temps: " + ((StateLight) command.getPayload()).getColor().getKelvin());
                     System.out.println("     Power: " + ((StateLight) command.getPayload()).getPower());
                     System.out.println("     Label: " + ((StateLight) command.getPayload()).getLabel());
                 }
 
                 if (command.getProtocol().getType() == 118) {
-                    System.out.println("\nStatePower_Light------------------------------------------------");
-                    System.out.println("     Level: " + ((StatePower_Light) command.getPayload()).getLevel());
+                    System.out.println("\nStatePowerLight------------------------------------------------");
+                    System.out.println("     Level: " + ((StatePowerLight) command.getPayload()).getLevel());
                 }
 
                 if (command.getProtocol().getType() == 121) {

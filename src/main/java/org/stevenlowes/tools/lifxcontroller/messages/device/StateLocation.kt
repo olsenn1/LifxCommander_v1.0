@@ -1,12 +1,13 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 import java.math.BigInteger
 import java.time.Instant
 
-class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16), var label: String = "N/A") : SetOnlyPayload(50) {
+class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16),
+                    var label: String = "N/A") : SetOnlyPayload(50) {
     var updatedAt: BigInteger? = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
 
     fun setUpdatedAtToNow() {

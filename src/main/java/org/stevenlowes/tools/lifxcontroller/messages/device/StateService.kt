@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 class StateService(var service: Int = 0, var port: Int = 0) : SetOnlyPayload(3) {

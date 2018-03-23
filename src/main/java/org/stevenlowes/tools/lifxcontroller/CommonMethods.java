@@ -1,4 +1,4 @@
-package org.stevenlowes.tools.lifxcontroller.commander;
+package org.stevenlowes.tools.lifxcontroller;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.TimeZone;
 
 public class CommonMethods {
+
+    private static final Random rand = new Random();
 
     static public byte[] convertBinaryStringToLittleEndianByteArray(String binValueAsString) {
         if ((binValueAsString.length() % 8) == 0) {
@@ -71,9 +73,7 @@ public class CommonMethods {
         return sdf.format(date);
     }
 
-    private static final Random rand = new Random();
-
-    static public byte[] randomBytes(int count){
+    static public byte[] randomBytes(int count) {
         byte[] bytes = new byte[count];
         rand.nextBytes(bytes);
         return bytes;

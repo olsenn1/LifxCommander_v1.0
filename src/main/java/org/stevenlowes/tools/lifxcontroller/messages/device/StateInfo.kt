@@ -4,9 +4,11 @@ import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 import java.math.BigInteger
 
-class StateInfo(var time: BigInteger = BigInteger.ZERO, var uptime: BigInteger = BigInteger.ZERO, var downtime: BigInteger = BigInteger.ZERO) : SetOnlyPayload(35) {
+class StateInfo(var time: BigInteger = BigInteger.ZERO,
+                var uptime: BigInteger = BigInteger.ZERO,
+                var downtime: BigInteger = BigInteger.ZERO) : SetOnlyPayload(35) {
 
-    constructor(stateInfo: StateInfo): this(stateInfo.time, stateInfo.uptime, stateInfo.downtime)
+    constructor(stateInfo: StateInfo) : this(stateInfo.time, stateInfo.uptime, stateInfo.downtime)
 
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         val timeBytes = ByteArray(8)

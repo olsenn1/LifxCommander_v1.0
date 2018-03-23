@@ -1,11 +1,18 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
+import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
-class SetWaveform(var reserved: Int = 0, var isTransient: Boolean = false, var color: HSBK = HSBK(), var period: Long = 0, var cycles: Float = 0f, var screwRatio: Int = 0, var waveform: Int = 0) :
+class SetWaveform(var reserved: Int = 0,
+                  var isTransient: Boolean = false,
+                  var color: HSBK = HSBK(),
+                  var period: Long = 0,
+                  var cycles: Float = 0f,
+                  var screwRatio: Int = 0,
+                  var waveform: Waveform = Waveform.SAWTOOTH) :
         GetOnlyPayload(103) {
 
     override val byteArray: ByteArray?
@@ -27,7 +34,7 @@ class SetWaveform(var reserved: Int = 0, var isTransient: Boolean = false, var c
             byteArray[1] = transientByte!![0]
 
             var hueBytes: ByteArray? = ByteArray(2)
-            val hueBinStr = String.format("%16s", Integer.toBinaryString(color.hue)).replace(' ', '0')
+            val hueBinStr = String.format("%16s", color.hue.binaryString).replace(' ', '0')
             hueBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(hueBinStr)
             byteArray[2] = hueBytes!![0]
             byteArray[3] = hueBytes[1]
@@ -70,7 +77,7 @@ class SetWaveform(var reserved: Int = 0, var isTransient: Boolean = false, var c
             byteArray[19] = scewRatioBytes[1]
 
             var waveformBytes: ByteArray? = ByteArray(1)
-            val waveformBinStr = String.format("%8s", Integer.toBinaryString(waveform)).replace(' ', '0')
+            val waveformBinStr = String.format("%8s", waveform.binaryString).replace(' ', '0')
             waveformBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(waveformBinStr)
             byteArray[20] = waveformBytes!![0]
 

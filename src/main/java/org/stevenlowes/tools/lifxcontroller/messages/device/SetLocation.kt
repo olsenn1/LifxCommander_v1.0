@@ -1,12 +1,13 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 
 import java.math.BigInteger
 import java.time.Instant
 
-class SetLocation(var location: ByteArray = CommonMethods.randomBytes(16), var label: String = "N/A") : GetOnlyPayload(49) {
+class SetLocation(var location: ByteArray = CommonMethods.randomBytes(16), var label: String = "N/A") : GetOnlyPayload(
+        49) {
     var updatedAt = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
 
     override val byteArray: ByteArray?

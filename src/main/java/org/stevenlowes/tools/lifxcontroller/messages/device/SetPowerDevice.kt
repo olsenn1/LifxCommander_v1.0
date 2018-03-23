@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
 
 class SetPowerDevice(var level: Int = 0) : GetOnlyPayload(21) {
@@ -15,5 +15,5 @@ class SetPowerDevice(var level: Int = 0) : GetOnlyPayload(21) {
             return byteArray
         }
 
-    constructor(setPower: SetPowerDevice): this(setPower.level)
+    constructor(setPower: SetPowerDevice) : this(setPower.level)
 }

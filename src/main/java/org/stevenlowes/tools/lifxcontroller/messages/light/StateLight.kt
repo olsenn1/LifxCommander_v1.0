@@ -1,21 +1,27 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.Payload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
-import org.stevenlowes.tools.lifxcontroller.values.Power
+import org.stevenlowes.tools.lifxcontroller.values.Hue
+import org.stevenlowes.tools.lifxcontroller.values.Levels
 
 import java.math.BigInteger
 
-class StateLight(var color: HSBK = HSBK(), var reserved1: Int = 0, var power: Int = Power.OFF, var label: String = "", var reserved2: BigInteger = BigInteger.ZERO) : SetOnlyPayload(107) {
+class StateLight(var color: HSBK = HSBK(),
+                 var reserved1: Int = 0,
+                 var power: Int = Levels.MIN,
+                 var label: String = "",
+                 var reserved2: BigInteger = BigInteger.ZERO) : SetOnlyPayload(107) {
 
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         var hueBinStr = ""
         for (i in 37 downTo 36) {
-            hueBinStr = hueBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])
+            hueBinStr += CommonMethods.convertByteToBinaryString(byteArray[i])
         }
-        color.hue = Integer.parseInt(hueBinStr, 2)
+        val hueInt = Integer.parseInt(hueBinStr, 2)
+        color.hue = Hue(hueInt)
+
         var saturationBinStr = ""
         for (i in 39 downTo 38) {
             saturationBinStr = saturationBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])

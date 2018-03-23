@@ -1,10 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
 class EchoResponse(val bytes: ByteArray? = CommonMethods.randomBytes(64)) : SetOnlyPayload(59) {
-    constructor(echoResponse: EchoResponse): this(echoResponse.bytes)
+    constructor(echoResponse: EchoResponse) : this(echoResponse.bytes)
 
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         for (i in 99 downTo 36) {

@@ -1,17 +1,17 @@
 package org.stevenlowes.tools.lifxcontroller.messages.header
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 
 //TODO make immutable
 
 data class Frame(
-    var size: Int = 0,                // 16-Bits
-    var origin: Int = 0,                // 2-Bits
-    var tagged: Boolean = false,            // 1-Bit
-    var addressable: Boolean = true,    // 1-Bit
-    var protocol: Int = 1024,            // 12-Bits
-    var source: Long = 0            // 32-Bits
-                ){
+        var size: Int = 0,                // 16-Bits
+        var origin: Int = 0,                // 2-Bits
+        var tagged: Boolean = false,            // 1-Bit
+        var addressable: Boolean = true,    // 1-Bit
+        var protocol: Int = 1024,            // 12-Bits
+        var source: Long = 0            // 32-Bits
+                ) {
 
     val byteArray: ByteArray
         get() {

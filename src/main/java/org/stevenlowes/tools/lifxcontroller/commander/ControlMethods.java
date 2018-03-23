@@ -1,5 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.commander;
 
+import org.stevenlowes.tools.lifxcontroller.CommonMethods;
+
 import java.io.IOException;
 import java.net.*;
 import java.util.Enumeration;

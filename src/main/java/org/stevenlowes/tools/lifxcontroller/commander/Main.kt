@@ -14,8 +14,7 @@ import org.stevenlowes.tools.lifxcontroller.messages.device.GetHostFirmware
 import org.stevenlowes.tools.lifxcontroller.messages.light.*
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Levels
-import org.stevenlowes.tools.lifxcontroller.values.Power
-import org.stevenlowes.tools.lifxcontroller.values.Waveforms
+import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
 fun main(args: Array<String>) {
     val port = 56700
@@ -25,7 +24,7 @@ fun main(args: Array<String>) {
     receiveMessages.start()
 
     //Turn On All Lights
-    val setPower = SetPowerLight(Power.ON)
+    val setPower = SetPowerLight(Levels.MAX)
     val powerOn = Command(setPower)
     ControlMethods.sendBroadcastMessage(powerOn.byteArray, port)
 
@@ -59,7 +58,7 @@ fun main(args: Array<String>) {
     setWaveform.cycles = 2f
     setWaveform.isTransient = true
     setWaveform.period = 4000
-    setWaveform.waveform = Waveforms.SINUSOID
+    setWaveform.waveform = Waveform.SINUSOID
     val changeColor = Command(setWaveform)
     ControlMethods.sendBroadcastMessage(changeColor.byteArray, port)
 

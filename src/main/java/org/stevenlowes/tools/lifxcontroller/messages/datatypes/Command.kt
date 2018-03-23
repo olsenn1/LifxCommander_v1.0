@@ -5,8 +5,8 @@ import org.stevenlowes.tools.lifxcontroller.messages.header.Frame
 import org.stevenlowes.tools.lifxcontroller.messages.header.FrameAddress
 import org.stevenlowes.tools.lifxcontroller.messages.header.Protocol
 import org.stevenlowes.tools.lifxcontroller.messages.light.StateInfrared
-import org.stevenlowes.tools.lifxcontroller.messages.light.StatePower_Light
 import org.stevenlowes.tools.lifxcontroller.messages.light.StateLight
+import org.stevenlowes.tools.lifxcontroller.messages.light.StatePowerLight
 
 class Command(var payload: Payload) {
     val frame = Frame()
@@ -58,7 +58,7 @@ class Command(var payload: Payload) {
         frameAddress.setFromCommandByteArray(byteArray)
         protocol.setFromCommandByteArray(byteArray)
 
-        when(protocol.type) {
+        when (protocol.type) {
             3 -> payload = StateService()
             13 -> payload = StateHostInfo()
             15 -> payload = StateHostFirmware()
@@ -73,7 +73,7 @@ class Command(var payload: Payload) {
             53 -> payload = StateGroup()
             59 -> payload = EchoResponse()
             107 -> payload = StateLight()
-            118 -> payload = StatePower_Light()
+            118 -> payload = StatePowerLight()
             121 -> payload = StateInfrared()
         }
 

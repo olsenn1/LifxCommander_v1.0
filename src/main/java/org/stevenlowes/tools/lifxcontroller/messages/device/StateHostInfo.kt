@@ -1,9 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
 
-class StateHostInfo(var signal: Float = 0F, var tx: Long = 0L, var rx: Long = 0L, var reserved: Int = 0) : SetOnlyPayload(13) {
+class StateHostInfo(var signal: Float = 0F,
+                    var tx: Long = 0L,
+                    var rx: Long = 0L,
+                    var reserved: Int = 0) : SetOnlyPayload(13) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         var signalBinStr = ""
         for (i in 39 downTo 36) {

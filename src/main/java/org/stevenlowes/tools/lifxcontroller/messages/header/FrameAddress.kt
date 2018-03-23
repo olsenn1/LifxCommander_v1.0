@@ -2,16 +2,16 @@ package org.stevenlowes.tools.lifxcontroller.messages.header
 
 //TODO make immutable
 
-import org.stevenlowes.tools.lifxcontroller.commander.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
 
 data class FrameAddress(
-    var target: Long = 0,                // 64-Bits
-    var reserved1: Long = 0,                // 48-Bits
-    var reserved2: Int = 0,                // 6-Bits
-    var ackRequired: Boolean = false,        // 1-Bit
-    var resRequired: Boolean = false,        // 1-Bit
-    var sequence: Int = 0                // 8-Bits
-                       ){
+        var target: Long = 0,                // 64-Bits
+        var reserved1: Long = 0,                // 48-Bits
+        var reserved2: Int = 0,                // 6-Bits
+        var ackRequired: Boolean = false,        // 1-Bit
+        var resRequired: Boolean = false,        // 1-Bit
+        var sequence: Int = 0                // 8-Bits
+                       ) {
 
     val byteArray: ByteArray
         get() {

@@ -3,11 +3,9 @@ package org.stevenlowes.tools.lifxcontroller.commands.header
 
 import org.stevenlowes.tools.lifxcontroller.Utils
 
-//TODO make immutable
-
-data class Protocol(var reserved1: Long = 0,                // 64-Bits
-                    var type: Int = 0,                    // 16-Bits
-                    var reserved2: Int = 0                // 16-Bits
+data class Protocol(val reserved1: Long = 0,                // 64-Bits
+                    val type: Int = 0,                    // 16-Bits
+                    val reserved2: Int = 0                // 16-Bits
                    ) {
 
 
@@ -29,20 +27,24 @@ data class Protocol(var reserved1: Long = 0,                // 64-Bits
             return byteArray
         }
 
-    fun setFromCommandByteArray(byteArray: ByteArray) {
-        var reserved1BinStr = ""
-        for (i in 31 downTo 24) {
-            reserved1BinStr = reserved1BinStr + Utils.convertByteToBinaryString(byteArray[i])
+    companion object {
+        fun loadFrom(byteArray: ByteArray): Protocol{
+            var reserved1BinStr = ""
+            for (i in 31 downTo 24) {
+                reserved1BinStr = reserved1BinStr + Utils.convertByteToBinaryString(byteArray[i])
+            }
+            val reserved1 = java.lang.Long.parseLong(reserved1BinStr, 2)
+
+            val typeBinStr = Utils.convertByteToBinaryString(byteArray[33]) + Utils.convertByteToBinaryString(
+                    byteArray[32])
+            val type = Integer.parseInt(typeBinStr, 2)
+
+            val reserved2BinStr = Utils.convertByteToBinaryString(byteArray[35]) + Utils.convertByteToBinaryString(
+                    byteArray[34])
+
+            val reserved2 = Integer.parseInt(reserved2BinStr, 2)
+            return Protocol(reserved1, type, reserved2)
         }
-        reserved1 = java.lang.Long.parseLong(reserved1BinStr, 2)
-
-        val typeBinStr = Utils.convertByteToBinaryString(byteArray[33]) + Utils.convertByteToBinaryString(
-                byteArray[32])
-        type = Integer.parseInt(typeBinStr, 2)
-
-        val reserved2BinStr = Utils.convertByteToBinaryString(byteArray[35]) + Utils.convertByteToBinaryString(
-                byteArray[34])
-        reserved2 = Integer.parseInt(reserved2BinStr, 2)
     }
 
 }

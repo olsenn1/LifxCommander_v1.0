@@ -5,13 +5,25 @@ package org.stevenlowes.tools.lifxcontroller.commands.header
 import org.stevenlowes.tools.lifxcontroller.Utils
 
 data class FrameAddress(
-        var target: Long = 0,                // 64-Bits
-        var reserved1: Long = 0,                // 48-Bits
-        var reserved2: Int = 0,                // 6-Bits
-        var ackRequired: Boolean = false,        // 1-Bit
-        var resRequired: Boolean = false,        // 1-Bit
-        var sequence: Int = 0                // 8-Bits
+        val target: Long = 0,                // 64-Bits
+        val reserved1: Long = 0,                // 48-Bits
+        val reserved2: Int = 0,                // 6-Bits
+        val ackRequired: Boolean = false,        // 1-Bit
+        val resRequired: Boolean = false,        // 1-Bit
+        val sequence: Int = 0                // 8-Bits
                        ) {
+
+    constructor(targetMacAddress: String = "",
+                reserved1: Long = 0,
+                reserved2: Int = 0,
+                ackRequired: Boolean = false,
+                resRequired: Boolean = false,
+                sequence: Int = 0) : this(Utils.convertHexStringToLong(targetMacAddress),
+                                          reserved1,
+                                          reserved2,
+                                          ackRequired,
+                                          resRequired,
+                                          sequence)
 
     val byteArray: ByteArray
         get() {
@@ -46,30 +58,30 @@ data class FrameAddress(
             return byteArray
         }
 
-    fun setTargetByMacAddress(macAddress: String) {
-        target = Utils.convertHexStringToLong(macAddress)
-    }
+    companion object {
+        fun loadFrom(byteArray: ByteArray): FrameAddress{
+            var targetBinStr = ""
+            for (i in 15 downTo 8) {
+                targetBinStr += Utils.convertByteToBinaryString(byteArray[i])
+            }
+            val target = java.lang.Long.parseLong(targetBinStr, 2)
 
-    fun setFromCommandByteArray(byteArray: ByteArray) {
-        var targetBinStr = ""
-        for (i in 15 downTo 8) {
-            targetBinStr += Utils.convertByteToBinaryString(byteArray[i])
+            var reserved1BinStr = ""
+            for (i in 21 downTo 16) {
+                reserved1BinStr = reserved1BinStr + Utils.convertByteToBinaryString(byteArray[i])
+            }
+            val reserved1 = java.lang.Long.parseLong(reserved1BinStr, 2)
+
+            val dataBinStr = Utils.convertByteToBinaryString(byteArray[22])
+            val reserved2BinStr = dataBinStr.substring(0, 6)
+            val reserved2 = Integer.parseInt(reserved2BinStr, 2)
+            val ackRequired = dataBinStr[6] == '1'
+            val resRequired = dataBinStr[7] == '1'
+
+            val sequenceBinStr = Utils.convertByteToBinaryString(byteArray[23])
+            val sequence = Integer.parseInt(sequenceBinStr, 2)
+
+            return FrameAddress(target, reserved1, reserved2, ackRequired, resRequired, sequence)
         }
-        target = java.lang.Long.parseLong(targetBinStr, 2)
-
-        var reserved1BinStr = ""
-        for (i in 21 downTo 16) {
-            reserved1BinStr = reserved1BinStr + Utils.convertByteToBinaryString(byteArray[i])
-        }
-        reserved1 = java.lang.Long.parseLong(reserved1BinStr, 2)
-
-        val dataBinStr = Utils.convertByteToBinaryString(byteArray[22])
-        val reserved2BinStr = dataBinStr.substring(0, 6)
-        reserved2 = Integer.parseInt(reserved2BinStr, 2)
-        ackRequired = dataBinStr[6] == '1'
-        resRequired = dataBinStr[7] == '1'
-
-        val sequenceBinStr = Utils.convertByteToBinaryString(byteArray[23])
-        sequence = Integer.parseInt(sequenceBinStr, 2)
     }
 }

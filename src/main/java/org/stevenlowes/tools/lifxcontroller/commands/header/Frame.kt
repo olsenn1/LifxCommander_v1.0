@@ -2,20 +2,17 @@ package org.stevenlowes.tools.lifxcontroller.commands.header
 
 import org.stevenlowes.tools.lifxcontroller.Utils
 
-//TODO make immutable
-
 data class Frame(
-        var size: Int = 0,                // 16-Bits
-        var origin: Int = 0,                // 2-Bits
-        var tagged: Boolean = false,            // 1-Bit
-        var addressable: Boolean = true,    // 1-Bit
-        var protocol: Int = 1024,            // 12-Bits
-        var source: Long = 0            // 32-Bits
+        val size: Int = 0,                // 16-Bits
+        val origin: Int = 0,                // 2-Bits
+        val tagged: Boolean = false,            // 1-Bit
+        val addressable: Boolean = true,    // 1-Bit
+        val protocol: Int = 1024,            // 12-Bits
+        val source: Long = 0            // 32-Bits
                 ) {
 
     val byteArray: ByteArray
         get() {
-
             val byteArray = ByteArray(8)
 
             val sizeBinStr = Integer.toBinaryString(0x10000 or size).substring(1)
@@ -23,7 +20,6 @@ data class Frame(
             byteArray[0] = sizeBytes[0]
             byteArray[1] = sizeBytes[1]
 
-            var dataBytes: ByteArray? = ByteArray(2)
             val originBinStr = Integer.toBinaryString(0x04 or origin).substring(1)
 
             val taggedBinStr: String = if (tagged)
@@ -38,7 +34,8 @@ data class Frame(
 
             val protocolBinStr = Integer.toBinaryString(0x1000 or protocol).substring(1)
             val dataBinStr = originBinStr + taggedBinStr + addressableBinStr + protocolBinStr
-            dataBytes = Utils.convertBinaryStringToLittleEndianByteArray(dataBinStr)
+
+            val dataBytes = Utils.convertBinaryStringToLittleEndianByteArray(dataBinStr)
             byteArray[2] = dataBytes[0]
             byteArray[3] = dataBytes[1]
 
@@ -52,24 +49,26 @@ data class Frame(
             return byteArray
         }
 
-    fun setFromCommandByteArray(byteArray: ByteArray) {
-        val sizeBinStr = Utils.convertByteToBinaryString(byteArray[1]) + Utils.convertByteToBinaryString(
-                byteArray[0])
-        size = Integer.parseInt(sizeBinStr, 2)
+    companion object {
+        fun loadFrom(byteArray: ByteArray): Frame {
+            val sizeBinStr = Utils.convertByteToBinaryString(byteArray[1]) + Utils.convertByteToBinaryString(
+                    byteArray[0])
+            val size = Integer.parseInt(sizeBinStr, 2)
 
-        val dataBinStr = Utils.convertByteToBinaryString(byteArray[3]) + Utils.convertByteToBinaryString(
-                byteArray[2])
-        val originBinStr = dataBinStr.substring(0, 2)
-        origin = Integer.parseInt(originBinStr, 2)
+            val dataBinStr = Utils.convertByteToBinaryString(byteArray[3]) + Utils.convertByteToBinaryString(
+                    byteArray[2])
+            val originBinStr = dataBinStr.substring(0, 2)
+            val origin = Integer.parseInt(originBinStr, 2)
 
-        tagged = dataBinStr[2] == '1'
-        addressable = dataBinStr[3] == '1'
-        val protocolBinStr = dataBinStr.substring(4, 16)
-        protocol = Integer.parseInt(protocolBinStr, 2)
+            val tagged = dataBinStr[2] == '1'
+            val addressable = dataBinStr[3] == '1'
+            val protocolBinStr = dataBinStr.substring(4, 16)
+            val protocol = Integer.parseInt(protocolBinStr, 2)
 
-        val sourceBinStr = (7.downTo(4)).map { Utils.convertByteToBinaryString(byteArray[it]) }.joinToString("")
-        source = java.lang.Long.parseLong(sourceBinStr, 2)
+            val sourceBinStr = (7.downTo(4)).map { Utils.convertByteToBinaryString(byteArray[it]) }.joinToString("")
+            val source = java.lang.Long.parseLong(sourceBinStr, 2)
 
+            return Frame(size, origin, tagged, addressable, protocol, source)
+        }
     }
-
 }

@@ -1,5 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.messages.datatypes
 
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.Payload
 import org.stevenlowes.tools.lifxcontroller.messages.device.*
 import org.stevenlowes.tools.lifxcontroller.messages.header.Frame
 import org.stevenlowes.tools.lifxcontroller.messages.header.FrameAddress
@@ -38,18 +40,14 @@ class Command(var payload: Payload) {
             }
 
             for (i in protocolEnd until frame.size) {
-                byteArray[i] = payload.byteArray!![i - protocolEnd]
+                byteArray[i] = payload.byteArray[i - protocolEnd]
             }
 
             return byteArray
         }
 
     private fun setSize() {
-        val size: Int
-        if (payload.byteArray != null)
-            size = frame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + payload.byteArray!!.size
-        else
-            size = frame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size
+        val size: Int = frame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + payload.byteArray.size
         frame.size = size
     }
 

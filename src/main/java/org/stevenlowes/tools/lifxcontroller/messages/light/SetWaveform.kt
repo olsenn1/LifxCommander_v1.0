@@ -2,7 +2,7 @@ package org.stevenlowes.tools.lifxcontroller.messages.light
 
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
@@ -13,9 +13,9 @@ class SetWaveform(var reserved: Int = 0,
                   var cycles: Float = 0f,
                   var screwRatio: Int = 0,
                   var waveform: Waveform = Waveform.SAWTOOTH) :
-        GetOnlyPayload(103) {
+        CustomReadPayload(103) {
 
-    override val byteArray: ByteArray?
+    override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(21)
 

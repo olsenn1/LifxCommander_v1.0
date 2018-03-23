@@ -1,9 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
 
-class StateWifiInfo(var signal: Float = 0f, var tx: Long = 0, var rx: Long = 0, var reserved: Int = 0) : SetOnlyPayload(
+class StateWifiInfo(var signal: Float = 0f,
+                    var tx: Long = 0,
+                    var rx: Long = 0,
+                    var reserved: Int = 0) : CustomWritePayload(
         17) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         var signalBinStr = ""

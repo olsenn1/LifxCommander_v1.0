@@ -1,10 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 
-class SetPowerLight(var level: Int = 0, var duration: Long = 0) : GetOnlyPayload(117) {
-    override val byteArray: ByteArray?
+class SetPowerLight(var level: Int = 0, var duration: Long = 0) : CustomReadPayload(117) {
+    override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(6)
 

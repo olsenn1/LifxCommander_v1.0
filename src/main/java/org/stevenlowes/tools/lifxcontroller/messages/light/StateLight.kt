@@ -2,7 +2,7 @@ package org.stevenlowes.tools.lifxcontroller.messages.light
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Levels
 
@@ -12,7 +12,7 @@ class StateLight(var color: HSBK = HSBK(),
                  var reserved1: Int = 0,
                  var power: Int = Levels.MIN,
                  var label: String = "",
-                 var reserved2: BigInteger = BigInteger.ZERO) : SetOnlyPayload(107) {
+                 var reserved2: BigInteger = BigInteger.ZERO) : CustomWritePayload(107) {
 
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         var hueBinStr = ""

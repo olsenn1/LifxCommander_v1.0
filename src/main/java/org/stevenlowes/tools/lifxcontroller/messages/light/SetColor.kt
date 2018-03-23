@@ -1,11 +1,11 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 
-class SetColor(var reserved: Int = 0, var hsbk: HSBK = HSBK(), var duration: Long = 0) : GetOnlyPayload(102) {
-    override val byteArray: ByteArray?
+class SetColor(var reserved: Int = 0, var hsbk: HSBK = HSBK(), var duration: Long = 0) : CustomReadPayload(102) {
+    override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(13)
 

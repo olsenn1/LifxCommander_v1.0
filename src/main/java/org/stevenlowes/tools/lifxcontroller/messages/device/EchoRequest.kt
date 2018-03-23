@@ -1,12 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 
-class EchoRequest(payload: ByteArray? = CommonMethods.randomBytes(64)) : GetOnlyPayload(58) {
-    var payload: ByteArray? = null
-
-    override val byteArray: ByteArray?
+class EchoRequest(var payload: ByteArray? = CommonMethods.randomBytes(64)) : CustomReadPayload(58) {
+    override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(64)
             for (i in 0..63) {
@@ -14,6 +12,4 @@ class EchoRequest(payload: ByteArray? = CommonMethods.randomBytes(64)) : GetOnly
             }
             return byteArray
         }
-
-    constructor(echoRequest: EchoRequest) : this(echoRequest.payload)
 }

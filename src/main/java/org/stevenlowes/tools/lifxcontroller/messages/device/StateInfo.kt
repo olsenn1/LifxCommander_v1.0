@@ -1,15 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
 
 import java.math.BigInteger
 
 class StateInfo(var time: BigInteger = BigInteger.ZERO,
                 var uptime: BigInteger = BigInteger.ZERO,
-                var downtime: BigInteger = BigInteger.ZERO) : SetOnlyPayload(35) {
-
-    constructor(stateInfo: StateInfo) : this(stateInfo.time, stateInfo.uptime, stateInfo.downtime)
-
+                var downtime: BigInteger = BigInteger.ZERO) : CustomWritePayload(35) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         val timeBytes = ByteArray(8)
         for (i in 43 downTo 36) {
@@ -28,7 +25,5 @@ class StateInfo(var time: BigInteger = BigInteger.ZERO,
             downtimeBytes[-1 * i + 59] = byteArray[i]
         }
         downtime = BigInteger(downtimeBytes)
-
     }
-
 }

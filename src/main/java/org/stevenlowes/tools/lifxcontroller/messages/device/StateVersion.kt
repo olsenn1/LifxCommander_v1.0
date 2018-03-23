@@ -1,9 +1,9 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
 
-class StateVersion(var vendor: Long = 0, var product: Long = 0, var version: Long = 0) : SetOnlyPayload(33) {
+class StateVersion(var vendor: Long = 0, var product: Long = 0, var version: Long = 0) : CustomWritePayload(33) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         var vendorBinStr = ""
         for (i in 39 downTo 36) {

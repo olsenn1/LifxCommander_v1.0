@@ -1,16 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 
-class SetInfrared(var brightness: Int = 0) : GetOnlyPayload(122) {
-    override val byteArray: ByteArray?
+class SetInfrared(var brightness: Int = 0) : CustomReadPayload(122) {
+    override val byteArray: ByteArray
         get() {
-            var byteArray: ByteArray? = ByteArray(2)
-
             val brightnessBinStr = String.format("%16s", Integer.toBinaryString(brightness)).replace(' ', '0')
-            byteArray = CommonMethods.convertBinaryStringToLittleEndianByteArray(brightnessBinStr)
-
-            return byteArray
+            return CommonMethods.convertBinaryStringToLittleEndianByteArray(brightnessBinStr)
         }
 }

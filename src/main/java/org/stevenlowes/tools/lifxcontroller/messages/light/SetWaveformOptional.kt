@@ -1,7 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.GetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
@@ -15,8 +15,8 @@ class SetWaveformOptional(var reserved: Int = 0,
                           var setHue: Boolean = true,
                           var setSaturation: Boolean = true,
                           var setBrightness: Boolean = true,
-                          var setKelvin: Boolean = true) : GetOnlyPayload(119) {
-    override val byteArray: ByteArray?
+                          var setKelvin: Boolean = true) : CustomReadPayload(119) {
+    override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(25)
 

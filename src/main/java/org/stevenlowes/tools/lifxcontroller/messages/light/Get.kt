@@ -1,5 +1,5 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SimplePayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.DefaultPayload
 
-class Get : SimplePayload(101)
+class Get : DefaultPayload(101)

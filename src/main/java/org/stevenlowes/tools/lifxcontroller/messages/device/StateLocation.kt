@@ -1,19 +1,14 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
 import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SetOnlyPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.UpdatedAt.CustomWriteUpdatedAtPayload
 
 import java.math.BigInteger
 import java.time.Instant
 
 class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16),
-                    var label: String = "N/A") : SetOnlyPayload(50) {
-    var updatedAt: BigInteger? = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
-
-    fun setUpdatedAtToNow() {
-        updatedAt = BigInteger.valueOf(Instant.now().toEpochMilli()).multiply(BigInteger.valueOf(1000000L))
-    }
-
+                    var label: String = "N/A") : CustomWriteUpdatedAtPayload(50) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         for (i in 51 downTo 36) {
             location[-1 * i + 51] = byteArray[i]
@@ -32,5 +27,4 @@ class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16),
         }
         updatedAt = BigInteger(updatedAtBytes)
     }
-
 }

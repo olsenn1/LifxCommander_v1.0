@@ -1,5 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.SimplePayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.DefaultPayload
+import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.Payload
 
-class GetWifiInfo : SimplePayload(16)
+class GetWifiInfo : DefaultPayload(16)

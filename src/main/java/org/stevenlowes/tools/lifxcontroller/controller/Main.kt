@@ -27,10 +27,9 @@ fun main(args: Array<String>) {
     val ips = listOf(ip1, ip2, ip3, ip4, ip5, ip6)
 
     // Start Receiving Incoming commands
-    val receiveMessages = ReceiveMessages(port)
-    receiveMessages.start()
+    ReceiveMessages(port).start()
 
-    for (i in 0..10) {
+    for (i in 1..3) {
         ips.forEach {
             ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).commandByteArray, it, port)
         }
@@ -59,9 +58,11 @@ fun main(args: Array<String>) {
             ControlMethods.sendUdpMessage(SetWaveform(color = Color(Hue.random),
                                                       isTransient = true,
                                                       period = 100,
-                                                      cycles = 100f).commandByteArray, it, port)
+                                                      cycles = 10f).commandByteArray, it, port)
         }
 
         Thread.sleep(1000)
     }
+
+    System.exit(0)
 }

@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.values
 import org.stevenlowes.tools.lifxcontroller.Utils
 
 /*
- * Constant values to be Assigned to Temp in HSBK Objects
+ * Constant values to be Assigned to Temp in Color Objects
  */
 
 data class Temp(val kelvin: Int) {

@@ -4,7 +4,7 @@ import org.stevenlowes.tools.lifxcontroller.Utils
 import java.util.*
 
 /*
- * Constant values to be Assigned to Hue in HSBK Objects
+ * Constant values to be Assigned to Hue in Color Objects
  */
 
 data class Hue(val hueDegrees: Int) {

@@ -1,10 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.messages.datatypes
 
 import org.stevenlowes.tools.lifxcontroller.values.Hue
-import org.stevenlowes.tools.lifxcontroller.values.Levels
-import org.stevenlowes.tools.lifxcontroller.values.Temps
+import org.stevenlowes.tools.lifxcontroller.values.Level
+import org.stevenlowes.tools.lifxcontroller.values.Temp
 
 data class HSBK(var hue: Hue = Hue.RED,
-                var saturation: Int = Levels.MAX,
-                var brightness: Int = Levels.MAX,
-                var kelvin: Int = Temps.MEDIUM.kelvin)
+                var saturation: Level = Level.MAX,
+                var brightness: Level = Level.MAX,
+                var temp: Temp = Temp.MEDIUM)

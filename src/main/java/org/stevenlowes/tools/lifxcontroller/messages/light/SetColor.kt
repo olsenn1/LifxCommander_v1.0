@@ -20,22 +20,16 @@ class SetColor(var reserved: Int = 0, var hsbk: HSBK = HSBK(), var duration: Lon
             byteArray[1] = hueBytes!![0]
             byteArray[2] = hueBytes[1]
 
-            var saturationBytes: ByteArray? = ByteArray(2)
-            val saturationBinStr = String.format("%16s", Integer.toBinaryString(hsbk.saturation)).replace(' ', '0')
-            saturationBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(saturationBinStr)
-            byteArray[3] = saturationBytes!![0]
+            val saturationBytes: ByteArray = hsbk.saturation.byteArray
+            byteArray[3] = saturationBytes[0]
             byteArray[4] = saturationBytes[1]
 
-            var brightnessBytes: ByteArray? = ByteArray(2)
-            val brightnessBinStr = String.format("%16s", Integer.toBinaryString(hsbk.brightness)).replace(' ', '0')
-            brightnessBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(brightnessBinStr)
-            byteArray[5] = brightnessBytes!![0]
+            val brightnessBytes: ByteArray = hsbk.brightness.byteArray
+            byteArray[5] = brightnessBytes[0]
             byteArray[6] = brightnessBytes[1]
 
-            var kelvinBytes: ByteArray? = ByteArray(2)
-            val kelvinBinStr = String.format("%16s", Integer.toBinaryString(hsbk.kelvin)).replace(' ', '0')
-            kelvinBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(kelvinBinStr)
-            byteArray[7] = kelvinBytes!![0]
+            val kelvinBytes: ByteArray = hsbk.temp.byteArray
+            byteArray[7] = kelvinBytes[0]
             byteArray[8] = kelvinBytes[1]
 
             var durationBytes: ByteArray? = ByteArray(4)

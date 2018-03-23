@@ -13,7 +13,7 @@ import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 import org.stevenlowes.tools.lifxcontroller.messages.device.GetHostFirmware
 import org.stevenlowes.tools.lifxcontroller.messages.light.*
 import org.stevenlowes.tools.lifxcontroller.values.Hue
-import org.stevenlowes.tools.lifxcontroller.values.Levels
+import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
 fun main(args: Array<String>) {
@@ -24,13 +24,13 @@ fun main(args: Array<String>) {
     receiveMessages.start()
 
     //Turn On All Lights
-    val setPower = SetPowerLight(Levels.MAX)
+    val setPower = SetPowerLight(Level.MAX)
     val powerOn = Command(setPower)
     ControlMethods.sendBroadcastMessage(powerOn.byteArray, port)
 
     //Make Lights White
     val hsbk1 = HSBK()
-    hsbk1.saturation = Levels.MIN
+    hsbk1.saturation = Level.MIN
     val setColor1 = SetColor(hsbk = hsbk1)
     val makeWhite = Command(setColor1)
     ControlMethods.sendBroadcastMessage(makeWhite.byteArray, port)
@@ -38,21 +38,21 @@ fun main(args: Array<String>) {
     //Make light Blue and 50% Brightness (Only light w/ IP = 192.168.2.35)
     val hsbk2 = HSBK()
     hsbk2.hue = Hue.BLUE
-    hsbk2.brightness = Levels.MAX / 2
+    hsbk2.brightness = Level.HALF
     val setColor2 = SetColor(hsbk = hsbk2)
     val makeBlue = Command(setColor2)
     ControlMethods.sendUdpMessage(makeBlue.byteArray, "192.168.2.35", port)
 
     //Turn Off Infrared (All Lights)
-    val setInfrared = SetInfrared(Levels.MIN)
+    val setInfrared = SetInfrared(Level.MIN)
     val turnOffIr = Command(setInfrared)
     ControlMethods.sendBroadcastMessage(turnOffIr.byteArray, port)
 
     // Transition Color
     val newColor = HSBK()
     newColor.hue = Hue.RED
-    newColor.saturation = Levels.MAX
-    newColor.brightness = Levels.MAX
+    newColor.saturation = Level.MAX
+    newColor.brightness = Level.MAX
     val setWaveform = SetWaveform()
     setWaveform.color = newColor
     setWaveform.cycles = 2f

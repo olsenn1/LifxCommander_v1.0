@@ -97,7 +97,7 @@ class ReceiveMessages extends Thread {
                     System.out.println("     Hue: " + ((StateLight) command.getPayload()).getColor().getAsLevel());
                     System.out.println("     Saturation: " + ((StateLight) command.getPayload()).getColor().getSaturation());
                     System.out.println("     Brightness: " + ((StateLight) command.getPayload()).getColor().getBrightness());
-                    System.out.println("     Temps: " + ((StateLight) command.getPayload()).getColor().getKelvin());
+                    System.out.println("     Temp: " + ((StateLight) command.getPayload()).getColor().getKelvin());
                     System.out.println("     Power: " + ((StateLight) command.getPayload()).getPower());
                     System.out.println("     Label: " + ((StateLight) command.getPayload()).getLabel());
                 }

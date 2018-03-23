@@ -1,5 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.values
 
+import org.stevenlowes.tools.lifxcontroller.CommonMethods
+
 /*
  * Constant values to be Assigned to Hue in HSBK Objects
  */
@@ -21,5 +23,6 @@ data class Hue(val hueDegrees: Int) {
         val CRIMSON = Hue(330)
     }
 
-    val binaryString: String get() = Integer.toBinaryString((hueDegrees.toDouble() / 360.toDouble() * Short.MAX_VALUE).toInt())
+    val binaryString: String = String.format("%16s", Integer.toBinaryString((hueDegrees.toDouble() / 360.toDouble() * Short.MAX_VALUE).toInt())).replace(' ', '0')
+    val byteArray: ByteArray = CommonMethods.convertBinaryStringToLittleEndianByteArray(binaryString)
 }

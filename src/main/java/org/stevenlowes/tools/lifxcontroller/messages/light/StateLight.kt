@@ -4,13 +4,14 @@ import org.stevenlowes.tools.lifxcontroller.CommonMethods
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
 import org.stevenlowes.tools.lifxcontroller.values.Hue
-import org.stevenlowes.tools.lifxcontroller.values.Levels
+import org.stevenlowes.tools.lifxcontroller.values.Level
+import org.stevenlowes.tools.lifxcontroller.values.Temp
 
 import java.math.BigInteger
 
 class StateLight(var color: HSBK = HSBK(),
                  var reserved1: Int = 0,
-                 var power: Int = Levels.MIN,
+                 var power: Level = Level.MIN,
                  var label: String = "",
                  var reserved2: BigInteger = BigInteger.ZERO) : CustomWritePayload(107) {
 
@@ -26,17 +27,18 @@ class StateLight(var color: HSBK = HSBK(),
         for (i in 39 downTo 38) {
             saturationBinStr = saturationBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])
         }
-        color.saturation = Integer.parseInt(saturationBinStr, 2)
+        color.saturation = Level(Integer.parseInt(saturationBinStr, 2))
         var brightnessBinStr = ""
         for (i in 41 downTo 40) {
             brightnessBinStr = brightnessBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])
         }
-        color.brightness = Integer.parseInt(brightnessBinStr, 2)
+        color.brightness = Level(Integer.parseInt(brightnessBinStr, 2))
         var kelvinBinStr = ""
         for (i in 43 downTo 42) {
             kelvinBinStr = kelvinBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])
         }
-        color.kelvin = Integer.parseInt(kelvinBinStr, 2)
+
+        color.temp = Temp(Integer.parseInt(kelvinBinStr, 2))
 
         var reserved1BinStr = ""
         for (i in 45 downTo 44) {
@@ -48,7 +50,7 @@ class StateLight(var color: HSBK = HSBK(),
         for (i in 47 downTo 46) {
             powerBinStr = powerBinStr + CommonMethods.convertByteToBinaryString(byteArray[i])
         }
-        power = Integer.parseInt(powerBinStr, 2)
+        power = Level(Integer.parseInt(powerBinStr, 2))
 
         val labelBytes = ByteArray(32)
         System.arraycopy(byteArray, 48, labelBytes, 0, 32)

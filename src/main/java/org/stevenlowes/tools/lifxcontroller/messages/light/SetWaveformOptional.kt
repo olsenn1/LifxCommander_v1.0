@@ -40,23 +40,17 @@ class SetWaveformOptional(var reserved: Int = 0,
             byteArray[2] = hueBytes!![0]
             byteArray[3] = hueBytes[1]
 
-            var saturationBytes: ByteArray? = ByteArray(2)
-            val saturationBinStr = String.format("%16s", Integer.toBinaryString(color.saturation)).replace(' ', '0')
-            saturationBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(saturationBinStr)
-            byteArray[4] = saturationBytes!![0]
+            val saturationBytes: ByteArray = color.saturation.byteArray
+            byteArray[4] = saturationBytes[0]
             byteArray[5] = saturationBytes[1]
 
-            val brightnessBytes: ByteArray?
-            val brightnessBinStr = String.format("%16s", Integer.toBinaryString(color.brightness)).replace(' ', '0')
-            brightnessBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(brightnessBinStr)
-            byteArray[6] = brightnessBytes!![0]
+            val brightnessBytes: ByteArray = color.brightness.byteArray
+            byteArray[6] = brightnessBytes[0]
             byteArray[7] = brightnessBytes[1]
 
-            var kelvinBytes: ByteArray? = ByteArray(2)
-            val kelvinBinStr = String.format("%16s", Integer.toBinaryString(color.kelvin)).replace(' ', '0')
-            kelvinBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(kelvinBinStr)
-            byteArray[8] = kelvinBytes!![0]
-            byteArray[9] = kelvinBytes[1]
+            val tempBytes: ByteArray = color.temp.byteArray
+            byteArray[8] = tempBytes[0]
+            byteArray[9] = tempBytes[1]
 
             var periodBytes: ByteArray? = ByteArray(4)
             val periodBinStr = String.format("%32s", java.lang.Long.toBinaryString(period)).replace(' ', '0')
@@ -77,10 +71,8 @@ class SetWaveformOptional(var reserved: Int = 0,
             byteArray[18] = scewRatioBytes!![0]
             byteArray[19] = scewRatioBytes[1]
 
-            var waveformBytes: ByteArray? = ByteArray(1)
-            val waveformBinStr = String.format("%8s", waveform.binaryString).replace(' ', '0')
-            waveformBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(waveformBinStr)
-            byteArray[20] = waveformBytes!![0]
+            val waveformBytes: ByteArray = waveform.byteArray
+            byteArray[20] = waveformBytes[0]
 
             var setHueByte: ByteArray? = ByteArray(1)
             val setHueBinStr: String

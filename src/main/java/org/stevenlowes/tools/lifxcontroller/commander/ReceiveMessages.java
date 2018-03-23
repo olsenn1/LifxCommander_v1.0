@@ -24,7 +24,7 @@ class ReceiveMessages extends Thread {
                 /*
                 Command command = new Command();
                 command.setFromCommandByteArray(byteArray);
-                //System.out.println("Type = " + command.getProtocol().getType() + "   Byte Array = " + CommonMethods.getHexValueAsString(byteArray));
+                //System.out.println("Type = " + command.getProtocol().getType() + "   Byte Array = " + Utils.getHexValueAsString(byteArray));
                 if (command.getProtocol().getType() == 3) {
                     System.out.println("\nStateService------------------------------------------------");
                     System.out.println("     Service: " + ((StateService) command.getPayload()).getService());
@@ -38,7 +38,7 @@ class ReceiveMessages extends Thread {
                 }
                 if (command.getProtocol().getType() == 15) {
                     System.out.println("\nStateHostFirmware------------------------------------------------");
-                    System.out.println("     Build Date: " + CommonMethods.getDateAsString(((StateHostFirmware) command.getPayload()).getBuild()));
+                    System.out.println("     Build Date: " + Utils.getDateAsString(((StateHostFirmware) command.getPayload()).getBuild()));
                     //System.out.println("     Version: " + ((StateHostFirmware)command.getBytes()).getVersion());
                     int major = (int) (((((StateHostFirmware) command.getPayload()).getVersion()) & 0xffff0000) >> 16);
                     int minor = (int) (((StateHostFirmware) command.getPayload()).getVersion() & 0xffff);
@@ -52,7 +52,7 @@ class ReceiveMessages extends Thread {
                 }
                 if (command.getProtocol().getType() == 19) {
                     System.out.println("\nStateWifiFirmware------------------------------------------------");
-                    System.out.println("     Build Date: " + CommonMethods.getDateAsString(((StateWifiFirmware) command.getPayload()).getBuild()));
+                    System.out.println("     Build Date: " + Utils.getDateAsString(((StateWifiFirmware) command.getPayload()).getBuild()));
                     System.out.println("     Version: " + ((StateWifiFirmware) command.getPayload()).getVersion());
                 }
                 if (command.getProtocol().getType() == 22) {
@@ -71,7 +71,7 @@ class ReceiveMessages extends Thread {
                 }
                 if (command.getProtocol().getType() == 35) {
                     System.out.println("\nStateInfo--------------------------------------------------------");
-                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateInfo) command.getPayload()).getTime()));
+                    System.out.println("     Time: " + Utils.getDateAsString(((StateInfo) command.getPayload()).getTime()));
                     System.out.println("     Uptime: " + ((StateInfo) command.getPayload()).getUptime().divide(BigInteger.valueOf(1000000000L)) + "s");
                     System.out.println("     Downtime: " + ((StateInfo) command.getPayload()).getDowntime().divide(BigInteger.valueOf(1000000000L)) + "s");
                 }
@@ -81,16 +81,16 @@ class ReceiveMessages extends Thread {
                 if (command.getProtocol().getType() == 50) {
                     System.out.println("\nStateLocation----------------------------------------------------");
                     System.out.println("     Label: " + ((StateLocation) command.getPayload()).getLabel());
-                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateLocation) command.getPayload()).getUpdatedAtNanos()));
+                    System.out.println("     Time: " + Utils.getDateAsString(((StateLocation) command.getPayload()).getUpdatedAtNanos()));
                 }
                 if (command.getProtocol().getType() == 53) {
                     System.out.println("\nStateGroup--------------------------------------------------------");
                     System.out.println("     Label: " + ((StateGroup) command.getPayload()).getLabel());
-                    System.out.println("     Time: " + CommonMethods.getDateAsString(((StateGroup) command.getPayload()).getUpdatedAtNanos()));
+                    System.out.println("     Time: " + Utils.getDateAsString(((StateGroup) command.getPayload()).getUpdatedAtNanos()));
                 }
                 if (command.getProtocol().getType() == 59) {
                     System.out.println("\nEchoResponse------------------------------------------------------");
-                    System.out.println("     Payload: " + CommonMethods.getHexValueAsString(((EchoResponse) command.getPayload()).getBytes()));
+                    System.out.println("     Payload: " + Utils.getHexValueAsString(((EchoResponse) command.getPayload()).getBytes()));
                 }
                 if (command.getProtocol().getType() == 107) {
                     System.out.println("\nState------------------------------------------------------------");

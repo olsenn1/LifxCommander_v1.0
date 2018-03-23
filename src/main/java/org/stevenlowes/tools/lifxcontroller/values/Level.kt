@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.values
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 
 
 /**
@@ -18,5 +18,5 @@ data class Level(val value: Double) {
 
     val sixteenBitValue = (value * 65535).toInt()
     val binaryString: String = String.format("%16s", Integer.toBinaryString(sixteenBitValue)).replace(' ', '0')
-    val byteArray: ByteArray = CommonMethods.convertBinaryStringToLittleEndianByteArray(binaryString)
+    val byteArray: ByteArray = Utils.convertBinaryStringToLittleEndianByteArray(binaryString)
 }

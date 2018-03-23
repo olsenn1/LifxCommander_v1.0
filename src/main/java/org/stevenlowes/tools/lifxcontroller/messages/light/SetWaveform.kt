@@ -1,9 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
+import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
 class SetWaveform(var reserved: Int = 0,
@@ -11,7 +12,7 @@ class SetWaveform(var reserved: Int = 0,
                   var color: HSBK = HSBK(),
                   var period: Long = 0,
                   var cycles: Float = 0f,
-                  var screwRatio: Int = 0,
+                  var skewRatio: Level = Level.MIN,
                   var waveform: Waveform = Waveform.SAWTOOTH) :
         CustomReadPayload(103) {
 
@@ -19,24 +20,14 @@ class SetWaveform(var reserved: Int = 0,
         get() {
             val byteArray = ByteArray(21)
 
-            var reservedByte: ByteArray? = ByteArray(1)
-            val reservedBinStr = String.format("%8s", Integer.toBinaryString(reserved)).replace(' ', '0')
-            reservedByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(reservedBinStr)
-            byteArray[0] = reservedByte!![0]
+            val reservedByte: ByteArray = Utils.toByteArray(1, reserved)
+            byteArray[0] = reservedByte[0]
 
-            var transientByte: ByteArray? = ByteArray(1)
-            val transientBinStr: String
-            if (isTransient)
-                transientBinStr = "00000001"
-            else
-                transientBinStr = "00000000"
-            transientByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(transientBinStr)
-            byteArray[1] = transientByte!![0]
+            val transientByte: ByteArray = Utils.boolToByteArray(isTransient)
+            byteArray[1] = transientByte[0]
 
-            var hueBytes: ByteArray? = ByteArray(2)
-            val hueBinStr = String.format("%16s", color.hue.binaryString).replace(' ', '0')
-            hueBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(hueBinStr)
-            byteArray[2] = hueBytes!![0]
+            val hueBytes: ByteArray = color.hue.byteArray
+            byteArray[2] = hueBytes[0]
             byteArray[3] = hueBytes[1]
 
             val saturationBytes: ByteArray = color.saturation.byteArray
@@ -51,24 +42,15 @@ class SetWaveform(var reserved: Int = 0,
             byteArray[8] = tempBytes[0]
             byteArray[9] = tempBytes[1]
 
-            var periodBytes: ByteArray? = ByteArray(4)
-            val periodBinStr = String.format("%32s", java.lang.Long.toBinaryString(period)).replace(' ', '0')
-            periodBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(periodBinStr)
-            System.arraycopy(periodBytes!!, 0, byteArray, 10, 4)
+            val periodBytes: ByteArray = Utils.toByteArray(4, period)
+            System.arraycopy(periodBytes, 0, byteArray, 10, 4)
 
-            var cyclesBytes: ByteArray? = ByteArray(4)
-            val cyclesBinStr = String.format("%32s",
-                                             Integer.toBinaryString(java.lang.Float.floatToRawIntBits(cycles))).replace(
-                    ' ',
-                    '0')
-            cyclesBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(cyclesBinStr)
-            System.arraycopy(cyclesBytes!!, 0, byteArray, 14, 4)
+            val cyclesBytes: ByteArray = Utils.toByteArray(4, cycles)
+            System.arraycopy(cyclesBytes, 0, byteArray, 14, 4)
 
-            var scewRatioBytes: ByteArray? = ByteArray(2)
-            val scewRatioBinStr = String.format("%16s", Integer.toBinaryString(screwRatio)).replace(' ', '0')
-            scewRatioBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(scewRatioBinStr)
-            byteArray[18] = scewRatioBytes!![0]
-            byteArray[19] = scewRatioBytes[1]
+            val skewRatioBytes: ByteArray = skewRatio.byteArray
+            byteArray[18] = skewRatioBytes[0]
+            byteArray[19] = skewRatioBytes[1]
 
             val waveformBytes: ByteArray = waveform.byteArray
             byteArray[20] = waveformBytes[0]

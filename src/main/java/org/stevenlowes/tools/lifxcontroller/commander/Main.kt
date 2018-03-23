@@ -10,7 +10,7 @@ package org.stevenlowes.tools.lifxcontroller.commander
 
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.Command
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
-import org.stevenlowes.tools.lifxcontroller.messages.device.GetHostFirmware
+import org.stevenlowes.tools.lifxcontroller.messages.device.SetPowerDevice
 import org.stevenlowes.tools.lifxcontroller.messages.light.*
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Level
@@ -18,60 +18,47 @@ import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
 fun main(args: Array<String>) {
     val port = 56700
+    val ip1 = "192.168.1.106"
+    val ip2 = "192.168.1.107"
+    val ip3 = "192.168.1.108"
+    val ip4 = "192.168.1.109"
+    val ip5 = "192.168.1.110"
+    val ip6 = "192.168.1.111"
+
+    val ips = listOf(ip1, ip2, ip3, ip4, ip5, ip6)
 
     // Start Receiving Incoming messages
     val receiveMessages = ReceiveMessages(port)
     receiveMessages.start()
 
-    //Turn On All Lights
-    val setPower = SetPowerLight(Level.MAX)
-    val powerOn = Command(setPower)
-    ControlMethods.sendBroadcastMessage(powerOn.byteArray, port)
+    for(i in 0..10){
+        ips.forEach {
+            ControlMethods.sendUdpMessage(Command(SetPowerLight(Level.MAX)).byteArray, it, port)
+        }
 
-    //Make Lights White
-    val hsbk1 = HSBK()
-    hsbk1.saturation = Level.MIN
-    val setColor1 = SetColor(hsbk = hsbk1)
-    val makeWhite = Command(setColor1)
-    ControlMethods.sendBroadcastMessage(makeWhite.byteArray, port)
+        Thread.sleep(1000)
 
-    //Make light Blue and 50% Brightness (Only light w/ IP = 192.168.2.35)
-    val hsbk2 = HSBK()
-    hsbk2.hue = Hue.BLUE
-    hsbk2.brightness = Level.HALF
-    val setColor2 = SetColor(hsbk = hsbk2)
-    val makeBlue = Command(setColor2)
-    ControlMethods.sendUdpMessage(makeBlue.byteArray, "192.168.2.35", port)
+        ips.forEach {
+            ControlMethods.sendUdpMessage(Command(SetPowerLight(Level.MIN)).byteArray, it, port)
+        }
 
-    //Turn Off Infrared (All Lights)
-    val setInfrared = SetInfrared(Level.MIN)
-    val turnOffIr = Command(setInfrared)
-    ControlMethods.sendBroadcastMessage(turnOffIr.byteArray, port)
+        ips.forEach {
+            ControlMethods.sendUdpMessage(Command(SetColor(color = HSBK(saturation = Level.MIN))).byteArray, it, port)
+        }
 
-    // Transition Color
-    val newColor = HSBK()
-    newColor.hue = Hue.RED
-    newColor.saturation = Level.MAX
-    newColor.brightness = Level.MAX
-    val setWaveform = SetWaveform()
-    setWaveform.color = newColor
-    setWaveform.cycles = 2f
-    setWaveform.isTransient = true
-    setWaveform.period = 4000
-    setWaveform.waveform = Waveform.SINUSOID
-    val changeColor = Command(setWaveform)
-    ControlMethods.sendBroadcastMessage(changeColor.byteArray, port)
+        Thread.sleep(1000)
 
-    // Print Firmware Version
-    val getHostFirmware = GetHostFirmware()
-    val firmwareCommand = Command(getHostFirmware)
-    firmwareCommand.frameAddress.resRequired = true
-    ControlMethods.sendBroadcastMessage(firmwareCommand.byteArray, port)
+        ips.forEach {
+            ControlMethods.sendUdpMessage(Command(SetPowerLight(Level.MAX)).byteArray, it, port)
+        }
 
-    // Print Current State
-    val get = Get()
-    val getCommand = Command(get)
-    getCommand.frameAddress.resRequired = true
-    ControlMethods.sendBroadcastMessage(getCommand.byteArray, port)
+        Thread.sleep(1000)
+        println("Sending")
 
+        ips.forEach {
+            ControlMethods.sendUdpMessage(Command(SetWaveform(color = HSBK(Hue.random), isTransient = true, period = 100, cycles = 100f)).byteArray, it, port)
+        }
+
+        Thread.sleep(10000)
+    }
 }

@@ -1,15 +1,13 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
+import org.stevenlowes.tools.lifxcontroller.values.Level
 
-class SetPowerDevice(var level: Int = 0) : CustomReadPayload(21) {
+class SetPowerDevice(var level: Level = Level.MIN) : CustomReadPayload(21) {
 
     override val byteArray: ByteArray
         get() {
-            val levelBinStr = String.format("%16s", Integer.toBinaryString(level)).replace(' ', '0')
-            return CommonMethods.convertBinaryStringToLittleEndianByteArray(levelBinStr)
+            return level.byteArray
         }
-
-    constructor(setPower: SetPowerDevice) : this(setPower.level)
 }

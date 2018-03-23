@@ -1,41 +1,35 @@
 package org.stevenlowes.tools.lifxcontroller.messages.light
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomReadPayload
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.HSBK
 
-class SetColor(var reserved: Int = 0, var hsbk: HSBK = HSBK(), var duration: Long = 0) : CustomReadPayload(102) {
+class SetColor(var reserved: Int = 0, var color: HSBK = HSBK(), var duration: Long = 0) : CustomReadPayload(102) {
     override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(13)
 
-            var reservedByte: ByteArray? = ByteArray(1)
-            val reservedBinStr = String.format("%8s", Integer.toBinaryString(reserved)).replace(' ', '0')
-            reservedByte = CommonMethods.convertBinaryStringToLittleEndianByteArray(reservedBinStr)
-            byteArray[0] = reservedByte!![0]
+            val reservedByte: ByteArray = Utils.toByteArray(1, reserved)
+            byteArray[0] = reservedByte[0]
 
-            var hueBytes: ByteArray? = ByteArray(2)
-            val hueBinStr = String.format("%16s", hsbk.hue.binaryString).replace(' ', '0')
-            hueBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(hueBinStr)
-            byteArray[1] = hueBytes!![0]
+            val hueBytes: ByteArray = color.hue.byteArray
+            byteArray[1] = hueBytes[0]
             byteArray[2] = hueBytes[1]
 
-            val saturationBytes: ByteArray = hsbk.saturation.byteArray
+            val saturationBytes: ByteArray = color.saturation.byteArray
             byteArray[3] = saturationBytes[0]
             byteArray[4] = saturationBytes[1]
 
-            val brightnessBytes: ByteArray = hsbk.brightness.byteArray
+            val brightnessBytes: ByteArray = color.brightness.byteArray
             byteArray[5] = brightnessBytes[0]
             byteArray[6] = brightnessBytes[1]
 
-            val kelvinBytes: ByteArray = hsbk.temp.byteArray
+            val kelvinBytes: ByteArray = color.temp.byteArray
             byteArray[7] = kelvinBytes[0]
             byteArray[8] = kelvinBytes[1]
 
-            var durationBytes: ByteArray? = ByteArray(4)
-            val durationBinStr = String.format("%32s", java.lang.Long.toBinaryString(duration)).replace(' ', '0')
-            durationBytes = CommonMethods.convertBinaryStringToLittleEndianByteArray(durationBinStr)
-            byteArray[9] = durationBytes!![0]
+            val durationBytes: ByteArray = Utils.toByteArray(4, duration)
+            byteArray[9] = durationBytes[0]
             byteArray[10] = durationBytes[1]
             byteArray[11] = durationBytes[2]
             byteArray[12] = durationBytes[3]

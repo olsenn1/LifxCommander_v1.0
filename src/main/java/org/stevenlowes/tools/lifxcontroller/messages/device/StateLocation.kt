@@ -1,13 +1,11 @@
 package org.stevenlowes.tools.lifxcontroller.messages.device
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
-import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.CustomWritePayload
+import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.messages.datatypes.payloads.UpdatedAt.CustomWriteUpdatedAtPayload
 
 import java.math.BigInteger
-import java.time.Instant
 
-class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16),
+class StateLocation(var location: ByteArray = Utils.randomBytes(16),
                     var label: String = "N/A") : CustomWriteUpdatedAtPayload(50) {
     override fun setFromCommandByteArray(byteArray: ByteArray) {
         for (i in 51 downTo 36) {
@@ -19,7 +17,7 @@ class StateLocation(var location: ByteArray = CommonMethods.randomBytes(16),
         label = String(labelBytes)
 
         //String updatedAtBinStr = "";
-        //for(int i=91; i>83; i--) updatedAtBinStr = updatedAtBinStr.concat(CommonMethods.convertByteToBinaryString(byteArray[i]));
+        //for(int i=91; i>83; i--) updatedAtBinStr = updatedAtBinStr.concat(Utils.convertByteToBinaryString(byteArray[i]));
         //updated_at = BigInteger.valueOf(Long.parseLong(updatedAtBinStr, 2));
         val updatedAtBytes = ByteArray(8)
         for (i in 91 downTo 84) {

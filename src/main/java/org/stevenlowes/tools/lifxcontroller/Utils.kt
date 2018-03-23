@@ -4,12 +4,9 @@ import java.math.BigInteger
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.Random
-import java.util.TimeZone
+import java.util.*
 
-object CommonMethods {
+object Utils {
 
     private val rand = Random()
 
@@ -74,5 +71,22 @@ object CommonMethods {
         return bytes
     }
 
+    fun toByteArray(bytes: Int, number: Long): ByteArray {
+        return Utils.convertBinaryStringToLittleEndianByteArray(String.format("%${bytes * 8}s",
+                                                                              java.lang.Long.toBinaryString(
+                                                                                      number)).replace(' ',
+                                                                                                       '0'))
+    }
 
+    fun toByteArray(bytes: Int, number: Int): ByteArray {
+        return toByteArray(bytes, number.toLong())
+    }
+
+    fun boolToByteArray(bool: Boolean): ByteArray {
+        return toByteArray(1, (if (bool) 1 else 0).toLong())
+    }
+
+    fun toByteArray(bytes: Int, number: Float): ByteArray {
+        return toByteArray(bytes, java.lang.Float.floatToRawIntBits(number).toLong())
+    }
 }

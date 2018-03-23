@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.values
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 
 /*
  * Constant values to be Assigned to Temp in HSBK Objects
@@ -14,5 +14,5 @@ data class Temp(val kelvin: Int) {
     }
 
     val binaryString: String = String.format("%16s", Integer.toBinaryString(kelvin)).replace(' ', '0')
-    val byteArray: ByteArray = CommonMethods.convertBinaryStringToLittleEndianByteArray(binaryString)
+    val byteArray: ByteArray = Utils.convertBinaryStringToLittleEndianByteArray(binaryString)
 }

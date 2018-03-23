@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.values
 
-import org.stevenlowes.tools.lifxcontroller.CommonMethods
+import org.stevenlowes.tools.lifxcontroller.Utils
 
 enum class Waveform(val id: Int) {
     SAWTOOTH(0),
@@ -9,6 +9,6 @@ enum class Waveform(val id: Int) {
     TRIANGLE(3),
     PULSE(4);
 
-    val fullBinaryString: String = String.format("%8s", Integer.toBinaryString(id)).replace(' ', '0')
-    val byteArray: ByteArray = CommonMethods.convertBinaryStringToLittleEndianByteArray(fullBinaryString)
+    val binaryString: String = String.format("%8s", Integer.toBinaryString(id)).replace(' ', '0')
+    val byteArray: ByteArray = Utils.convertBinaryStringToLittleEndianByteArray(binaryString)
 }

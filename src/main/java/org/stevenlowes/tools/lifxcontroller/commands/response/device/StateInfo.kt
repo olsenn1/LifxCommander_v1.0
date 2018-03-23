@@ -4,9 +4,9 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
 import java.math.BigInteger
 
-class StateInfo(var time: BigInteger = BigInteger.ZERO,
-                var uptime: BigInteger = BigInteger.ZERO,
-                var downtime: BigInteger = BigInteger.ZERO) : ResponsePayload(35) {
+class StateInfo(val time: BigInteger = BigInteger.ZERO,
+                val uptime: BigInteger = BigInteger.ZERO,
+                val downtime: BigInteger = BigInteger.ZERO) : ResponsePayload(35) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateInfo{

@@ -4,7 +4,7 @@ import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
 import org.stevenlowes.tools.lifxcontroller.values.Level
 
-class SetPowerLight(var level: Level = Level.MIN, var duration: Long = 0) : RequestPayload(117) {
+class SetPowerLight(val level: Level = Level.MIN, var duration: Long = 0) : RequestPayload(117) {
     override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(6)

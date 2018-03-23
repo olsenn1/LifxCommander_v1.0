@@ -9,11 +9,11 @@ import org.stevenlowes.tools.lifxcontroller.values.Temp
 
 import java.math.BigInteger
 
-class StateLight(var color: Color = Color(),
-                 var reserved1: Int = 0,
-                 var power: Level = Level.MIN,
-                 var label: String = "",
-                 var reserved2: BigInteger = BigInteger.ZERO) : ResponsePayload(107) {
+class StateLight(val color: Color = Color(),
+                 val reserved1: Int = 0,
+                 val power: Level = Level.MIN,
+                 val label: String = "",
+                 val reserved2: BigInteger = BigInteger.ZERO) : ResponsePayload(107) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateLight{

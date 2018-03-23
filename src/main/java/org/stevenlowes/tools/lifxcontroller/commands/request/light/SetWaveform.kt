@@ -7,13 +7,13 @@ import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
-class SetWaveform(var reserved: Int = 0,
-                  var isTransient: Boolean = false,
-                  var color: Color = Color(),
-                  var period: Long = 0,
-                  var cycles: Float = 0f,
-                  var skewRatio: Level = Level.MIN,
-                  var waveform: Waveform = Waveform.SAWTOOTH) :
+class SetWaveform(val reserved: Int = 0,
+                  val isTransient: Boolean = false,
+                  val color: Color = Color(),
+                  val period: Long = 0,
+                  val cycles: Float = 0f,
+                  val skewRatio: Level = Level.MIN,
+                  val waveform: Waveform = Waveform.SAWTOOTH) :
         RequestPayload(103) {
 
     override val byteArray: ByteArray

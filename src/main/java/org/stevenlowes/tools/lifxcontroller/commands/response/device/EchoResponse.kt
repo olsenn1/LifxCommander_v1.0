@@ -5,7 +5,6 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
 //TODO should we really be initialising with random bytes?
 class EchoResponse(val bytes: ByteArray = Utils.randomBytes(64)) : ResponsePayload(59) {
-
     companion object {
         fun loadFrom(byteArray: ByteArray): EchoResponse {
             val bytes = ByteArray(64)

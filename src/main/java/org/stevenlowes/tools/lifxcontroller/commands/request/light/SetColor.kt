@@ -4,7 +4,7 @@ import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
 import org.stevenlowes.tools.lifxcontroller.values.Color
 
-class SetColor(var reserved: Int = 0, var color: Color = Color(), var duration: Long = 0) : RequestPayload(102) {
+class SetColor(val reserved: Int = 0, var color: Color = Color(), var duration: Long = 0) : RequestPayload(102) {
     override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(13)

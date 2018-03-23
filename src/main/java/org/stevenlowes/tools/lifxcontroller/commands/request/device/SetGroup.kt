@@ -3,8 +3,8 @@ package org.stevenlowes.tools.lifxcontroller.commands.request.device
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayloadUpdateTime
 
-class SetGroup(var group: ByteArray = Utils.randomBytes(16),
-               var label: String = "N/A") : RequestPayloadUpdateTime(52) {
+class SetGroup(val group: ByteArray = Utils.randomBytes(16),
+               val label: String = "N/A") : RequestPayloadUpdateTime(52) {
 
     override val byteArray: ByteArray
         get() {

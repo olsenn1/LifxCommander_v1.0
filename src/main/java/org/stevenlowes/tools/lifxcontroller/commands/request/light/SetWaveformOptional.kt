@@ -6,17 +6,22 @@ import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
 
-class SetWaveformOptional(var reserved: Int = 0,
-                          var isTransient: Boolean = false,
-                          var color: Color = Color(),
-                          var period: Long = 0,
-                          var cycles: Float = 0f,
-                          var skewRatio: Level = Level.MIN,
-                          var waveform: Waveform = Waveform.SAWTOOTH,
-                          var setHue: Boolean = true,
-                          var setSaturation: Boolean = true,
-                          var setBrightness: Boolean = true,
-                          var setKelvin: Boolean = true) : RequestPayload(119) {
+//TODO make immutable
+//TODO make data classes
+//TODO remove redundant constructors
+//TODO calculate byteArray on instantiation
+
+class SetWaveformOptional(val reserved: Int = 0,
+                          val isTransient: Boolean = false,
+                          val color: Color = Color(),
+                          val period: Long = 0,
+                          val cycles: Float = 0f,
+                          val skewRatio: Level = Level.MIN,
+                          val waveform: Waveform = Waveform.SAWTOOTH,
+                          val setHue: Boolean = true,
+                          val setSaturation: Boolean = true,
+                          val setBrightness: Boolean = true,
+                          val setKelvin: Boolean = true) : RequestPayload(119) {
     override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(25)

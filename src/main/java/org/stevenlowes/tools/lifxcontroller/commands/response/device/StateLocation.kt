@@ -5,8 +5,8 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayloadUpd
 
 import java.math.BigInteger
 
-class StateLocation(var location: ByteArray = Utils.randomBytes(16),
-                    var label: String = "N/A") : ResponsePayloadUpdateTime(50) {
+class StateLocation(val location: ByteArray = Utils.randomBytes(16),
+                    val label: String = "N/A") : ResponsePayloadUpdateTime(50) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateLocation{

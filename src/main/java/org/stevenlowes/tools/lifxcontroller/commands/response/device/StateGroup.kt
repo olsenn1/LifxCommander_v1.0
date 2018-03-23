@@ -5,7 +5,9 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayloadUpd
 
 import java.math.BigInteger
 
-class StateGroup(var group: ByteArray = Utils.randomBytes(16), var label: String = "N/A") : ResponsePayloadUpdateTime(53) {
+//TODO remove default args from responses
+
+class StateGroup(val group: ByteArray = Utils.randomBytes(16), val label: String = "N/A") : ResponsePayloadUpdateTime(53) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateGroup{

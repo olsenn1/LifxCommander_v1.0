@@ -1,12 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.commands.request.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayloadUpdateTime
+import org.stevenlowes.tools.lifxcontroller.commands.request.RequestCommandUpdateTime
 
 data class SetGroup(val group: ByteArray = Utils.randomBytes(16),
-                    val label: String = "N/A") : RequestPayloadUpdateTime(52) {
+                    val label: String = "N/A") : RequestCommandUpdateTime(52) {
 
-    override val byteArray: ByteArray
+    override val payloadBytes: ByteArray
         get() {
             val byteArray = ByteArray(56)
 

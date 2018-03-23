@@ -31,24 +31,24 @@ fun main(args: Array<String>) {
 
     for (i in 1..3) {
         ips.forEach {
-            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).commandByteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).requestBytes, it, port)
         }
 
         Thread.sleep(1000)
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(SetPowerLight(Level.MIN).commandByteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MIN).requestBytes, it, port)
         }
 
         ips.forEach {
             ControlMethods.sendUdpMessage(SetColor(color = Color(
-                    saturation = Level.MIN)).commandByteArray, it, port)
+                    saturation = Level.MIN)).requestBytes, it, port)
         }
 
         Thread.sleep(1000)
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).commandByteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).requestBytes, it, port)
         }
 
         Thread.sleep(1000)
@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
             ControlMethods.sendUdpMessage(SetWaveform(color = Color(Hue.random),
                                                       isTransient = true,
                                                       period = 100,
-                                                      cycles = 10f).commandByteArray, it, port)
+                                                      cycles = 10f).requestBytes, it, port)
         }
 
         Thread.sleep(1000)

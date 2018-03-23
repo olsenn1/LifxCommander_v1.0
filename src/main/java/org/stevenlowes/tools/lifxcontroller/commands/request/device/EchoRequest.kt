@@ -1,10 +1,10 @@
 package org.stevenlowes.tools.lifxcontroller.commands.request.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
+import org.stevenlowes.tools.lifxcontroller.commands.request.RequestCommand
 
-data class EchoRequest(val payload: ByteArray = Utils.randomBytes(64)) : RequestPayload(58) {
-    override val byteArray: ByteArray
+data class EchoRequest(val payload: ByteArray = Utils.randomBytes(64)) : RequestCommand(58) {
+    override val payloadBytes: ByteArray
         get() {
             val byteArray = ByteArray(64)
             for (i in 0..63) {

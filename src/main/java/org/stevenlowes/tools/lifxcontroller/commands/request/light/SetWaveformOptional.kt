@@ -1,7 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.commands.request.light
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
+import org.stevenlowes.tools.lifxcontroller.commands.request.RequestCommand
 import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
@@ -9,7 +9,7 @@ import org.stevenlowes.tools.lifxcontroller.values.Waveform
 //TODO make immutable
 //TODO make data classes
 //TODO remove redundant constructors
-//TODO calculate byteArray on instantiation
+//TODO calculate payloadBytes on instantiation
 
 data class SetWaveformOptional(val reserved: Int = 0,
                           val isTransient: Boolean = false,
@@ -21,8 +21,8 @@ data class SetWaveformOptional(val reserved: Int = 0,
                           val setHue: Boolean = true,
                           val setSaturation: Boolean = true,
                           val setBrightness: Boolean = true,
-                          val setKelvin: Boolean = true) : RequestPayload(119) {
-    override val byteArray: ByteArray
+                          val setKelvin: Boolean = true) : RequestCommand(119) {
+    override val payloadBytes: ByteArray
         get() {
             val byteArray = ByteArray(25)
 

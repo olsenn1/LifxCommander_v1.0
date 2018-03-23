@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.response
 import java.math.BigInteger
 import java.time.Instant
 
-abstract class ResponsePayloadUpdateTime(code: Int): ResponsePayload(code){
+abstract class ResponseCommandUpdateTime(code: Int): ResponseCommand(code){
     lateinit var updatedAt: BigInteger
 
     init {

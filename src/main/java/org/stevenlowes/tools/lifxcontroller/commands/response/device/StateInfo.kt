@@ -1,12 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommand
 
 import java.math.BigInteger
 
 data class StateInfo(val time: BigInteger = BigInteger.ZERO,
                 val uptime: BigInteger = BigInteger.ZERO,
-                val downtime: BigInteger = BigInteger.ZERO) : ResponsePayload(35) {
+                val downtime: BigInteger = BigInteger.ZERO) : ResponseCommand(35) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateInfo{

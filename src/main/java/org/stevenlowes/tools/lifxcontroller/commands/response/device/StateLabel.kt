@@ -1,8 +1,8 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommand
 
-data class StateLabel(val label: String = "") : ResponsePayload(25) {
+data class StateLabel(val label: String = "") : ResponseCommand(25) {
     companion object {
         fun loadFrom(byteArray: ByteArray): StateLabel {
             val labelBytes = ByteArray(32)

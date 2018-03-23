@@ -1,12 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayloadUpdateTime
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommandUpdateTime
 
 import java.math.BigInteger
 
 data class StateLocation(val location: ByteArray = Utils.randomBytes(16),
-                    val label: String = "N/A") : ResponsePayloadUpdateTime(50) {
+                    val label: String = "N/A") : ResponseCommandUpdateTime(50) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateLocation{
@@ -20,7 +20,7 @@ data class StateLocation(val location: ByteArray = Utils.randomBytes(16),
             val label = String(labelBytes)
 
             //String updatedAtBinStr = "";
-            //for(int i=91; i>83; i--) updatedAtBinStr = updatedAtBinStr.concat(Utils.convertByteToBinaryString(byteArray[i]));
+            //for(int i=91; i>83; i--) updatedAtBinStr = updatedAtBinStr.concat(Utils.convertByteToBinaryString(payloadBytes[i]));
             //updated_at = BigInteger.valueOf(Long.parseLong(updatedAtBinStr, 2));
             val updatedAtBytes = ByteArray(8)
             for (i in 91 downTo 84) {

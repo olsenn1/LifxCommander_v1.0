@@ -1,9 +1,9 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommand
 
-data class StateService(val service: Int = 0, val port: Int = 0) : ResponsePayload(3) {
+data class StateService(val service: Int = 0, val port: Int = 0) : ResponseCommand(3) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateService{

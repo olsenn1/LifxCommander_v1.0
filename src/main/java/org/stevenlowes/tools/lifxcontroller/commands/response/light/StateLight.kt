@@ -1,7 +1,7 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.light
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommand
 import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Level
@@ -12,7 +12,7 @@ data class StateLight(val color: Color = Color(),
                       val reserved1: Int = 0,
                       val power: Level = Level.MIN,
                       val label: String = "",
-                      val reserved2: BigInteger = BigInteger.ZERO) : ResponsePayload(107) {
+                      val reserved2: BigInteger = BigInteger.ZERO) : ResponseCommand(107) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateLight {

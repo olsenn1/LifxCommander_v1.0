@@ -2,7 +2,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.request.light
 
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
+import org.stevenlowes.tools.lifxcontroller.commands.request.RequestCommand
 import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Waveform
@@ -14,9 +14,9 @@ data class SetWaveform(val reserved: Int = 0,
                   val cycles: Float = 0f,
                   val skewRatio: Level = Level.MIN,
                   val waveform: Waveform = Waveform.SAWTOOTH) :
-        RequestPayload(103) {
+        RequestCommand(103) {
 
-    override val byteArray: ByteArray
+    override val payloadBytes: ByteArray
         get() {
             val byteArray = ByteArray(21)
 

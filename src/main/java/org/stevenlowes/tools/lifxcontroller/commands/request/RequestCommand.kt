@@ -1,19 +1,20 @@
 package org.stevenlowes.tools.lifxcontroller.commands.request
 
-import org.stevenlowes.tools.lifxcontroller.commands.Payload
+import org.stevenlowes.tools.lifxcontroller.commands.HasCode
 import org.stevenlowes.tools.lifxcontroller.commands.header.Frame
 import org.stevenlowes.tools.lifxcontroller.commands.header.FrameAddress
 import org.stevenlowes.tools.lifxcontroller.commands.header.Protocol
 
-abstract class RequestPayload(code: Int) : Payload(code) {
-    val commandByteArray: ByteArray
+abstract class RequestCommand(code: Int) : HasCode(code) {
+    abstract val payloadBytes: ByteArray
+
+    val requestBytes: ByteArray
         get() {
             val startFrame = Frame()
             val frameAddress = FrameAddress()
             val protocol = Protocol(type = code)
 
-            val frame = Frame(size = startFrame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + this.byteArray.size)
-
+            val frame = Frame(size = startFrame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + this.payloadBytes.size)
 
             val byteArray = ByteArray(frame.size)
             val frameEnd = frame.byteArray.size
@@ -33,7 +34,7 @@ abstract class RequestPayload(code: Int) : Payload(code) {
             }
 
             for (i in protocolEnd until frame.size) {
-                byteArray[i] = this.byteArray[i - protocolEnd]
+                byteArray[i] = this.payloadBytes[i - protocolEnd]
             }
 
             return byteArray

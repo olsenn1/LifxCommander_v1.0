@@ -1,12 +1,12 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommand
 
 data class StateWifiInfo(val signal: Float = 0f,
                     val tx: Long = 0,
                     val rx: Long = 0,
-                    val reserved: Int = 0) : ResponsePayload(
+                    val reserved: Int = 0) : ResponseCommand(
         17) {
 
     companion object {

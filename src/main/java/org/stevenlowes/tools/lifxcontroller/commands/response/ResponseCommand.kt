@@ -1,6 +1,6 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response
 
-import org.stevenlowes.tools.lifxcontroller.commands.Payload
+import org.stevenlowes.tools.lifxcontroller.commands.HasCode
 import org.stevenlowes.tools.lifxcontroller.commands.header.Frame
 import org.stevenlowes.tools.lifxcontroller.commands.header.FrameAddress
 import org.stevenlowes.tools.lifxcontroller.commands.header.Protocol
@@ -8,20 +8,18 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.device.*
 import org.stevenlowes.tools.lifxcontroller.commands.response.light.StateInfrared
 import org.stevenlowes.tools.lifxcontroller.commands.response.light.StateLight
 import org.stevenlowes.tools.lifxcontroller.commands.response.light.StatePowerLight
-import org.stevenlowes.tools.lifxcontroller.commands.simple.device.Acknowledgement
+import org.stevenlowes.tools.lifxcontroller.commands.response.device.Acknowledgement
 
-//TODO what is the difference between this and SimplePayload
+//TODO what is the difference between this and SimpleCommand
 
-abstract class ResponsePayload(code: Int) : Payload(code){
-    override val byteArray = throw UnsupportedOperationException("Cannot read a Response Payload")
-
+abstract class ResponseCommand(code: Int) : HasCode(code){
     companion object {
-        fun loadFrom(byteArray: ByteArray): ResponsePayload{
+        fun loadFrom(byteArray: ByteArray): ResponseCommand{
             val frame = Frame.loadFrom(byteArray)
             val frameAddress = FrameAddress.loadFrom(byteArray)
             val protocol = Protocol.loadFrom(byteArray)
 
-            val payload: ResponsePayload
+            val payload: ResponseCommand
 
             when (protocol.type) {
                 3 -> payload = StateService.loadFrom(byteArray)

@@ -1,11 +1,11 @@
 package org.stevenlowes.tools.lifxcontroller.commands.request.light
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
+import org.stevenlowes.tools.lifxcontroller.commands.request.RequestCommand
 import org.stevenlowes.tools.lifxcontroller.values.Color
 
-data class SetColor(val reserved: Int = 0, var color: Color = Color(), var duration: Long = 0) : RequestPayload(102) {
-    override val byteArray: ByteArray
+data class SetColor(val reserved: Int = 0, var color: Color = Color(), var duration: Long = 0) : RequestCommand(102) {
+    override val payloadBytes: ByteArray
         get() {
             val byteArray = ByteArray(13)
 

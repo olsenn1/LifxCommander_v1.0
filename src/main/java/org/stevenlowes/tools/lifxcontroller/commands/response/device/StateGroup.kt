@@ -1,13 +1,13 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.device
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayloadUpdateTime
+import org.stevenlowes.tools.lifxcontroller.commands.response.ResponseCommandUpdateTime
 
 import java.math.BigInteger
 
 //TODO remove default args from responses
 
-data class StateGroup(val group: ByteArray = Utils.randomBytes(16), val label: String = "N/A") : ResponsePayloadUpdateTime(53) {
+data class StateGroup(val group: ByteArray = Utils.randomBytes(16), val label: String = "N/A") : ResponseCommandUpdateTime(53) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateGroup{

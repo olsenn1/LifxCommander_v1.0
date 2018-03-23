@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.response.light
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
-class StatePowerLight(val level: Int = 0) : ResponsePayload(118) {
+data class StatePowerLight(val level: Int = 0) : ResponsePayload(118) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StatePowerLight{

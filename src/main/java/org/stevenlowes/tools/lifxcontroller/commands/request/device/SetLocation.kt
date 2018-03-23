@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.request.device
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayloadUpdateTime
 
-class SetLocation(val location: ByteArray = Utils.randomBytes(16),
+data class SetLocation(val location: ByteArray = Utils.randomBytes(16),
                   val label: String = "N/A") : RequestPayloadUpdateTime(49) {
     override val byteArray: ByteArray
         get() {

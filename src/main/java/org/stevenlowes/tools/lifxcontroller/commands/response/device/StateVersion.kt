@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.response.device
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
-class StateVersion(val vendor: Long = 0, val product: Long = 0, val version: Long = 0) : ResponsePayload(33) {
+data class StateVersion(val vendor: Long = 0, val product: Long = 0, val version: Long = 0) : ResponsePayload(33) {
 
     companion object {
         fun loadFrom(byteArray: ByteArray): StateVersion{

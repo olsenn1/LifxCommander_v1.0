@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.response.light
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
-class StateInfrared(val brightness: Int = 0) : ResponsePayload(121) {
+data class StateInfrared(val brightness: Int = 0) : ResponsePayload(121) {
     companion object {
         fun loadFrom(byteArray: ByteArray): StateInfrared{
             val brightnessBinStr = Utils.convertByteToBinaryString(byteArray[36])

@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.request.device
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.request.RequestPayload
 
-class EchoRequest(val payload: ByteArray = Utils.randomBytes(64)) : RequestPayload(58) {
+data class EchoRequest(val payload: ByteArray = Utils.randomBytes(64)) : RequestPayload(58) {
     override val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(64)

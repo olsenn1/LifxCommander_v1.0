@@ -1,22 +1,21 @@
 package org.stevenlowes.tools.lifxcontroller.commands.response.light
 
 import org.stevenlowes.tools.lifxcontroller.Utils
-import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
+import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Level
 import org.stevenlowes.tools.lifxcontroller.values.Temp
-
 import java.math.BigInteger
 
-class StateLight(val color: Color = Color(),
-                 val reserved1: Int = 0,
-                 val power: Level = Level.MIN,
-                 val label: String = "",
-                 val reserved2: BigInteger = BigInteger.ZERO) : ResponsePayload(107) {
+data class StateLight(val color: Color = Color(),
+                      val reserved1: Int = 0,
+                      val power: Level = Level.MIN,
+                      val label: String = "",
+                      val reserved2: BigInteger = BigInteger.ZERO) : ResponsePayload(107) {
 
     companion object {
-        fun loadFrom(byteArray: ByteArray): StateLight{
+        fun loadFrom(byteArray: ByteArray): StateLight {
             val color = Color()
 
             var hueBinStr = ""

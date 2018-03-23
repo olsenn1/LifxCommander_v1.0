@@ -11,7 +11,7 @@ import org.stevenlowes.tools.lifxcontroller.values.Waveform
 //TODO remove redundant constructors
 //TODO calculate byteArray on instantiation
 
-class SetWaveformOptional(val reserved: Int = 0,
+data class SetWaveformOptional(val reserved: Int = 0,
                           val isTransient: Boolean = false,
                           val color: Color = Color(),
                           val period: Long = 0,

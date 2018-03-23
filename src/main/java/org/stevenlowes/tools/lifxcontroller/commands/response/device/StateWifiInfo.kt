@@ -3,7 +3,7 @@ package org.stevenlowes.tools.lifxcontroller.commands.response.device
 import org.stevenlowes.tools.lifxcontroller.Utils
 import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
-class StateWifiInfo(val signal: Float = 0f,
+data class StateWifiInfo(val signal: Float = 0f,
                     val tx: Long = 0,
                     val rx: Long = 0,
                     val reserved: Int = 0) : ResponsePayload(

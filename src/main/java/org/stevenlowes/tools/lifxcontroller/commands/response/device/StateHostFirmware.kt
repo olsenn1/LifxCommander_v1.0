@@ -5,7 +5,7 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
 import java.math.BigInteger
 
-class StateHostFirmware(val build: BigInteger = BigInteger.ZERO,
+data class StateHostFirmware(val build: BigInteger = BigInteger.ZERO,
                         val reserved: BigInteger = BigInteger.ZERO,
                         val version: Long = 0L) : ResponsePayload(15) {
 

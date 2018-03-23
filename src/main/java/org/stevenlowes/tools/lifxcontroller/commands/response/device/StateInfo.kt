@@ -4,7 +4,7 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayload
 
 import java.math.BigInteger
 
-class StateInfo(val time: BigInteger = BigInteger.ZERO,
+data class StateInfo(val time: BigInteger = BigInteger.ZERO,
                 val uptime: BigInteger = BigInteger.ZERO,
                 val downtime: BigInteger = BigInteger.ZERO) : ResponsePayload(35) {
 

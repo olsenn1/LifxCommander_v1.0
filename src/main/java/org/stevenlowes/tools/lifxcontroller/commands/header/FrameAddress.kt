@@ -13,18 +13,6 @@ data class FrameAddress(
         val sequence: Int = 0                // 8-Bits
                        ) {
 
-    constructor(targetMacAddress: String = "",
-                reserved1: Long = 0,
-                reserved2: Int = 0,
-                ackRequired: Boolean = false,
-                resRequired: Boolean = false,
-                sequence: Int = 0) : this(Utils.convertHexStringToLong(targetMacAddress),
-                                          reserved1,
-                                          reserved2,
-                                          ackRequired,
-                                          resRequired,
-                                          sequence)
-
     val byteArray: ByteArray
         get() {
             val byteArray = ByteArray(16)
@@ -35,7 +23,6 @@ data class FrameAddress(
             val reserved1Bytes: ByteArray = Utils.toByteArray(6, reserved1)
             System.arraycopy(reserved1Bytes, 0, byteArray, 8, 6)
 
-            var dataByte: ByteArray? = ByteArray(1)
             val reserved2BinStr = String.format("%6s", Integer.toBinaryString(reserved2)).replace(' ', '0')
 
             val ackRequiredBinStr: String = if (ackRequired)
@@ -49,7 +36,7 @@ data class FrameAddress(
                 "0"
 
             val dataBinStr = reserved2BinStr + ackRequiredBinStr + resRequiredBinStr
-            dataByte = Utils.convertBinaryStringToLittleEndianByteArray(dataBinStr)
+            val dataByte = Utils.convertBinaryStringToLittleEndianByteArray(dataBinStr)
             byteArray[14] = dataByte[0]
 
             val sequenceByte: ByteArray = Utils.toByteArray(1, sequence)

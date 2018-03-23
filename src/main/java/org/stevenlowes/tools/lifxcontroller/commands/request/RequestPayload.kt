@@ -6,16 +6,14 @@ import org.stevenlowes.tools.lifxcontroller.commands.header.FrameAddress
 import org.stevenlowes.tools.lifxcontroller.commands.header.Protocol
 
 abstract class RequestPayload(code: Int) : Payload(code) {
-    override fun setFromCommandByteArray(byteArray: ByteArray) {
-        throw UnsupportedOperationException("Cannot set a request payload")
-    }
-
     val commandByteArray: ByteArray
         get() {
-            val frame = Frame()
+            val startFrame = Frame()
             val frameAddress = FrameAddress()
             val protocol = Protocol(type = code)
-            frame.size = frame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + this.byteArray.size
+
+            val frame = Frame(size = startFrame.byteArray.size + frameAddress.byteArray.size + protocol.byteArray.size + this.byteArray.size)
+
 
             val byteArray = ByteArray(frame.size)
             val frameEnd = frame.byteArray.size

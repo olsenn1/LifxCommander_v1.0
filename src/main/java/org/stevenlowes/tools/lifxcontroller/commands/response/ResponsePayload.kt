@@ -10,6 +10,8 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.light.StateLight
 import org.stevenlowes.tools.lifxcontroller.commands.response.light.StatePowerLight
 import org.stevenlowes.tools.lifxcontroller.commands.simple.device.Acknowledgement
 
+//TODO what is the difference between this and SimplePayload
+
 abstract class ResponsePayload(code: Int) : Payload(code){
     override val byteArray = throw UnsupportedOperationException("Cannot read a Response Payload")
 
@@ -31,7 +33,7 @@ abstract class ResponsePayload(code: Int) : Payload(code){
                 25 -> payload = StateLabel.loadFrom(byteArray)
                 33 -> payload = StateVersion.loadFrom(byteArray)
                 35 -> payload = StateInfo.loadFrom(byteArray)
-                45 -> payload = Acknowledgement.loadFrom(byteArray)
+                45 -> payload = Acknowledgement()
                 50 -> payload = StateLocation.loadFrom(byteArray)
                 53 -> payload = StateGroup.loadFrom(byteArray)
                 59 -> payload = EchoResponse.loadFrom(byteArray)

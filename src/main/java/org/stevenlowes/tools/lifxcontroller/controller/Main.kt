@@ -8,11 +8,10 @@
 
 package org.stevenlowes.tools.lifxcontroller.controller
 
-import org.stevenlowes.tools.lifxcontroller.commands.Command
-import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.commands.request.light.SetColor
 import org.stevenlowes.tools.lifxcontroller.commands.request.light.SetPowerLight
 import org.stevenlowes.tools.lifxcontroller.commands.request.light.SetWaveform
+import org.stevenlowes.tools.lifxcontroller.values.Color
 import org.stevenlowes.tools.lifxcontroller.values.Hue
 import org.stevenlowes.tools.lifxcontroller.values.Level
 
@@ -31,41 +30,38 @@ fun main(args: Array<String>) {
     val receiveMessages = ReceiveMessages(port)
     receiveMessages.start()
 
-    for(i in 0..10){
+    for (i in 0..10) {
         ips.forEach {
-            ControlMethods.sendUdpMessage(Command(
-                    SetPowerLight(Level.MAX)).byteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).commandByteArray, it, port)
         }
 
         Thread.sleep(1000)
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(Command(
-                    SetPowerLight(Level.MIN)).byteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MIN).commandByteArray, it, port)
         }
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(Command(
-                    SetColor(color = Color(
-                            saturation = Level.MIN))).byteArray, it, port)
+            ControlMethods.sendUdpMessage(SetColor(color = Color(
+                    saturation = Level.MIN)).commandByteArray, it, port)
         }
 
         Thread.sleep(1000)
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(Command(
-                    SetPowerLight(Level.MAX)).byteArray, it, port)
+            ControlMethods.sendUdpMessage(SetPowerLight(Level.MAX).commandByteArray, it, port)
         }
 
         Thread.sleep(1000)
         println("Sending")
 
         ips.forEach {
-            ControlMethods.sendUdpMessage(Command(
-                    SetWaveform(color = Color(
-                            Hue.random), isTransient = true, period = 100, cycles = 100f)).byteArray, it, port)
+            ControlMethods.sendUdpMessage(SetWaveform(color = Color(Hue.random),
+                                                      isTransient = true,
+                                                      period = 100,
+                                                      cycles = 100f).commandByteArray, it, port)
         }
 
-        Thread.sleep(10000)
+        Thread.sleep(1000)
     }
 }

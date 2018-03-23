@@ -6,20 +6,27 @@ import org.stevenlowes.tools.lifxcontroller.commands.response.ResponsePayloadUpd
 import java.math.BigInteger
 
 class StateGroup(var group: ByteArray = Utils.randomBytes(16), var label: String = "N/A") : ResponsePayloadUpdateTime(53) {
-    override fun setFromCommandByteArray(byteArray: ByteArray) {
-        for (i in 51 downTo 36) {
-            group[-1 * i + 51] = byteArray[i]
+
+    companion object {
+        fun loadFrom(byteArray: ByteArray): StateGroup{
+            val group = ByteArray(16)
+            for (i in 51 downTo 36) {
+                group[-1 * i + 51] = byteArray[i]
+            }
+
+            val labelBytes = ByteArray(32)
+            System.arraycopy(byteArray, 52, labelBytes, 0, 32)
+            val label = String(labelBytes)
+
+            val updatedAtBytes = ByteArray(8)
+            for (i in 91 downTo 84) {
+                updatedAtBytes[-1 * i + 91] = byteArray[i]
+            }
+            val updatedAt = BigInteger(updatedAtBytes)
+
+            val stateGroup = StateGroup(group, label)
+            stateGroup.updatedAt = updatedAt
+            return stateGroup
         }
-
-        val labelBytes = ByteArray(32)
-        System.arraycopy(byteArray, 52, labelBytes, 0, 32)
-        label = String(labelBytes)
-
-        val updatedAtBytes = ByteArray(8)
-        for (i in 91 downTo 84) {
-            updatedAtBytes[-1 * i + 91] = byteArray[i]
-        }
-
-        updatedAt = BigInteger(updatedAtBytes)
     }
 }
